@@ -8,4 +8,26 @@
     let requester = new Requester(authService);
 
     authService.initAuthorizationType("Kinvey");
+
+    let selector = ".wrapper";
+    let mainContentSelector = ".main-content";
+
+
+    let homeView = new HomeView(mainContentSelector, selector);
+    let homeController = new HomeController(homeView, requester, baseUrl, appKey);
+
+    // let userView = new UserView(mainContentSelector, selector);
+    // let userController = new UserController(userView, requester, baseUrl, appKey);
+    initEventServices();
+
+    onRoute("#/", function () {
+        console.log("router");
+        // if (authService.isLoggedIn()) {
+        //     homeController.showUserPage();
+        // }
+        // else {
+            homeController.showGuestPage();
+        // }
+    });
+    run('#/');
 });
