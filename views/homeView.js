@@ -10,21 +10,21 @@ class HomeView {
             let renderedWrapper = Mustache.render(template, null);
 
             $(_that._wrapperSelector).html(renderedWrapper);
-            $.get('templates/posts.html', function (template) {
-                let blogPosts = {
-                    blogPosts:mainData
-                };
-                let renderedPosts = Mustache.render(template, blogPosts);
-                $('.articles').html(renderedPosts);
-            });
+            // $.get('templates/posts.html', function (template) {
+            //     let blogPosts = {
+            //         blogPosts:mainData
+            //     };
+            //     let renderedPosts = Mustache.render(template, blogPosts);
+            //     $('.articles').html(renderedPosts);
+            // });
 
-            $.get('templates/recent-posts.html', function (template) {
-                let recentPosts = {
-                    recentPosts:sidebarData
-                };
-                let renderedPosts = Mustache.render(template, recentPosts);
-                $('.recent-posts').html(renderedPosts);
-            });
+            // $.get('templates/recent-posts.html', function (template) {
+            //     let recentPosts = {
+            //         recentPosts:sidebarData
+            //     };
+            //     let renderedPosts = Mustache.render(template, recentPosts);
+            //     $('.recent-posts').html(renderedPosts);
+            // });
         });
     }
 
