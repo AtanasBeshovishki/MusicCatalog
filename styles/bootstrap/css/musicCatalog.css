@@ -1,3 +1,22 @@
 .search{
     display: none;
 }
+.login{
+    display: none;
+}
+
+.footer-text{
+    text-align: center;
+}
+
+.registerForm{
+    width: 500px;
+    margin-top: 10px;
+}
+.form-group{
+    padding: 20px;
+}
+
+.col-form-label {
+
+}
