@@ -1,33 +1,36 @@
 class UserController {
-    constructor(userView, requester, baseUrl, appKey){
+    constructor(userView, requester, baseUrl, appKey) {
         this._userView = userView;
         this._requester = requester;
         this._appKey = appKey;
-        this._baseServiceUrl = baseUrl + "/user/" + appKey + "/posts";
+        this._baseServiceUrl = baseUrl + "/user/" + appKey + "/";
     }
 
-    showLoginPage(isLoggedIn){
+    showLoginPage(isLoggedIn) {
         this._userView.showLoginPage(isLoggedIn);
     }
 
-    showRegisterPage(isLoggedIn){
+    showRegisterPage(isLoggedIn) {
         this._userView.showRegisterPage(isLoggedIn);
+
+
+        // $(register-request-button
     }
 
 
-        register(requestData) {
-        if (requestData.username.length < 6) {
-            showPopup('error', "Username must consist of atleast 5 symbols.");
+    register(requestData) {
+        if (requestData.username.length < 4) {
+            showPopup('error', "Username must consist of atleast 3 symbols.");
             return;
         }
 
-        if (requestData.fullName.length < 8) {
-            showPopup('error', "Full name must consist of atleast 8 symbols.");
+        if (requestData.fullName.length < 4) {
+            showPopup('error', "Full name must consist of atleast 3 symbols.");
             return;
         }
 
-        if (requestData.password.length < 6) {
-            showPopup('error', "Password must consist of atleast 6 symbols.");
+        if (requestData.password.length < 4) {
+            showPopup('error', "Password must consist of atleast 3 symbols.");
             return;
         }
 
@@ -37,19 +40,23 @@ class UserController {
         }
 
         delete requestData['confirmPassword'];
-        let requestUrl = this._baseServiceUrl;
+        // let requestUrl = this._baseServiceUrl;
 
-        this._requester.post(requestUrl, requestData,
-            function success(data) {
+        console.log(this._baseServiceUrl, requestData);
+
+        this._requester.post(this._baseServiceUrl, requestData,
+            function success(response) {
+                console.log(response);
                 showPopup('success', "You have successfully registered.");
-                redirectUrl("#/login");
+                //redirectUrl("#/login");
             },
-            function error(data) {
+            function error(response) {
+                console.log(response);
                 showPopup('error', "An error has occurred while attempting to register.");
             });
     }
 
-    login(requestData){
+    login(requestData) {
         let requestUrl = this._baseServiceUrl + "login";
 
         this._requester.post(requestUrl, requestData,
@@ -67,7 +74,7 @@ class UserController {
             });
     }
 
-    logout(){
+    logout() {
         sessionStorage.clear();
         redirectUrl("#/");
     }
