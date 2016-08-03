@@ -25,27 +25,29 @@ class UserView {
     }
     showRegisterPage(isLoggedIn){
 
-    	console.log("showRegisterPage");
+    	// console.log("showRegisterPage");
 
         let _that = this;
         $.get('templates/register.html', function(template) {
             let rendered = Mustache.render(template, null);
             $(_that._wrapperSelector).html(rendered);
-            console.log("showRegisterPage2", _that._mainContentSelector);
-            // $('#register-request-button').on('click', function () {
-            //     let username = $('#username').val();
-            //     let password = $('#password').val();
-            //     let fullName = $('#full-name').val();
-            //     let confirmPassword = $('#pass-confirm').val();
-            //
-            //     let data = {
-            //         username:username,
-            //         password:password,
-            //         fullName:fullName,
-            //         confirmPassword:confirmPassword
-            //     };
-            //     triggerEvent('register', data);
-            // })
+            // console.log("showRegisterPage2", _that._mainContentSelector);
+            $('#register-request-button').on('click', function () {
+
+                let username = $('#username').val();
+                let password = $('#password').val();
+                let fullName = $('#fullName').val();
+                let confirmPassword = $('#confirmPassword').val();
+
+                let data = {
+                    username:username,
+                    password:password,
+                    fullName:fullName,
+                    confirmPassword:confirmPassword
+                };
+
+                triggerEvent('register', data);
+            })
         });
     }
 }
