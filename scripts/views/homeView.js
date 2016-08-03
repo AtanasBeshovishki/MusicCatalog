@@ -13,6 +13,14 @@ class HomeView {
         });
     }
 
+    showUserPage(sideBarData, mainData) {
+        let _that = this;
+
+        $.get('templates/welcome-user.html', function (template) {
+            let rendered = Mustache.render(template, null);
+            $(_that._wrapperSelector).html(rendered);
+        });
+    }
 //    showUserPage(sideBarData, mainData){
 //
 //        let _that = this;

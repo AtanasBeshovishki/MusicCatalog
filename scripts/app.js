@@ -32,12 +32,12 @@
     onRoute("#/",
         function () {
         // Check if user is logged in and if its not show the guest page, otherwise show the user page...
-        //if(!authService.isLoggedIn()){
+        if(!authService.isLoggedIn()){
             homeController.showGuestPage();
-        //}
-        //else{
-        //    homeController.showUserPage();
-        //}
+        }
+        else{
+           homeController.showUserPage();
+        }
     });
 
     onRoute("#/login", function () {

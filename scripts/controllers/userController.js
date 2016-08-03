@@ -19,17 +19,17 @@ class UserController {
 
 
     register(requestData) {
-        if (requestData.username.length < 4) {
+        if (requestData.username.length < 2) {
             showPopup('error', "Username must consist of atleast 3 symbols.");
             return;
         }
 
-        if (requestData.fullName.length < 4) {
+        if (requestData.fullName.length < 3) {
             showPopup('error', "Full name must consist of atleast 3 symbols.");
             return;
         }
 
-        if (requestData.password.length < 4) {
+        if (requestData.password.length < 3) {
             showPopup('error', "Password must consist of atleast 3 symbols.");
             return;
         }
@@ -46,9 +46,9 @@ class UserController {
 
         this._requester.post(this._baseServiceUrl, requestData,
             function success(response) {
-                console.log(response);
+                // console.log(response);
                 showPopup('success', "You have successfully registered.");
-                //redirectUrl("#/login");
+                redirectUrl("#/login");
             },
             function error(response) {
                 console.log(response);
