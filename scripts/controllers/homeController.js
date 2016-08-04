@@ -1,17 +1,17 @@
 class HomeController {
-    constructor(homeView, requester, baseServiceUrl, appKey){
+    constructor(homeView, requester, baseServiceUrl, appKey) {
         this._homeView = homeView;
         this._requester = requester;
         this._appKey = appKey;
         this._baseServiceUrl = baseServiceUrl;
     }
 
-    showGuestPage(){
+    showGuestPage() {
         let _that = this;
 
         let recentPosts = [];
 
-        _that._homeView.showGuestPage(null,null);
+        _that._homeView.showGuestPage(null, null);
 
         // let requestUrl = this._baseServiceUrl + "/appdata/" + this._appKey + "/";
         //
@@ -36,12 +36,12 @@ class HomeController {
         //     });
     }
 
-    showUserPage(){
+    showUserPage() {
         let _that = this;
 
         let recentPosts = [];
 
-        _that._homeView.showUserPage(null,null);
+        _that._homeView.showUserPage(null, null);
 
         // let recentPosts = [];
         //

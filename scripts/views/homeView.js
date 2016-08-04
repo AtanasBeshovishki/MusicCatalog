@@ -1,10 +1,10 @@
 class HomeView {
-    constructor(wrapperSelector, mainContentSelector){
+    constructor(wrapperSelector, mainContentSelector) {
         this._wrapperSelector = wrapperSelector;
         this._mainContentSelector = mainContentSelector;
     }
 
-    showGuestPage(sideBarData, mainData){
+    showGuestPage() {
         let _that = this;
 
         $.get('templates/welcome-guest.html', function (template) {
@@ -13,7 +13,7 @@ class HomeView {
         });
     }
 
-    showUserPage(sideBarData, mainData) {
+    showUserPage() {
         let _that = this;
 
         $.get('templates/welcome-user.html', function (template) {
@@ -21,6 +21,7 @@ class HomeView {
             $(_that._wrapperSelector).html(rendered);
         });
     }
+
 //    showUserPage(sideBarData, mainData){
 //
 //        let _that = this;

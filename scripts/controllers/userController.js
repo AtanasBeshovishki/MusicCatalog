@@ -13,24 +13,21 @@ class UserController {
     showRegisterPage(isLoggedIn) {
         this._userView.showRegisterPage(isLoggedIn);
 
-
-        // $(register-request-button
     }
 
-
     register(requestData) {
-        if (requestData.username.length < 2) {
-            showPopup('error', "Username must consist of atleast 3 symbols.");
+        if (requestData.username.length < 3) {
+            showPopup('error', "Username must consist of at least 3 symbols.");
             return;
         }
 
         if (requestData.fullName.length < 3) {
-            showPopup('error', "Full name must consist of atleast 3 symbols.");
+            showPopup('error', "Full name must consist of at least 3 symbols.");
             return;
         }
 
         if (requestData.password.length < 3) {
-            showPopup('error', "Password must consist of atleast 3 symbols.");
+            showPopup('error', "Password must consist of at least 3 symbols.");
             return;
         }
 

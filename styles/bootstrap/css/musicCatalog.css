@@ -1,4 +1,4 @@
-.registerForm, .loginForm{
+.registerForm, .loginForm, .createSong{
     width: 900px;
 }
 .form-group{

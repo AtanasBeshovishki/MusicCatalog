@@ -1,13 +1,13 @@
 class UserView {
-    constructor(wrapperSelector, mainContentSelector){
+    constructor(wrapperSelector, mainContentSelector) {
         this._wrapperSelector = wrapperSelector;
         this._mainContentSelector = mainContentSelector;
     }
 
-    showLoginPage(isLoggedIn){
+    showLoginPage(isLoggedIn) {
         let _that = this;
 
-        $.get('templates/login.html', function(template) {
+        $.get('templates/login.html', function (template) {
             let rendered = Mustache.render(template, null);
             $(_that._wrapperSelector).html(rendered);
 
@@ -23,15 +23,14 @@ class UserView {
             })
         });
     }
-    showRegisterPage(isLoggedIn){
 
-    	// console.log("showRegisterPage");
+    showRegisterPage(isLoggedIn) {
 
         let _that = this;
-        $.get('templates/register.html', function(template) {
+        $.get('templates/register.html', function (template) {
             let rendered = Mustache.render(template, null);
             $(_that._wrapperSelector).html(rendered);
-            // console.log("showRegisterPage2", _that._mainContentSelector);
+
             $('#register-request-button').on('click', function () {
 
                 let username = $('#username').val();
@@ -40,10 +39,10 @@ class UserView {
                 let confirmPassword = $('#confirmPassword').val();
 
                 let data = {
-                    username:username,
-                    password:password,
-                    fullName:fullName,
-                    confirmPassword:confirmPassword
+                    username: username,
+                    password: password,
+                    fullName: fullName,
+                    confirmPassword: confirmPassword
                 };
 
                 triggerEvent('register', data);

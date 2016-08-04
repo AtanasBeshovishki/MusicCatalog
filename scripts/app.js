@@ -8,13 +8,12 @@
     let _guestCredentials = "a2lkX1MxVWdXYTJQOjM5MTM5MzRhOGYxODRlODdhYTM4ZjU3OGVlNTM1ZDlk"; // Create a guest user using PostMan/RESTClient/Fiddler and place his authtoken here...
 
 
-
     //Create AuthorizationService and Requester
 
     let authService = new AuthorizationService(baseUrl,
-                                                appKey,
-                                                appSecret,
-                                                _guestCredentials);
+        appKey,
+        appSecret,
+        _guestCredentials);
     authService.initAuthorizationType("Kinvey");
     let requester = new Requester(authService);
 
@@ -24,20 +23,29 @@
 
     let homeView = new HomeView(selector, mainContentSelector);
     let homeController = new HomeController(homeView, requester, baseUrl, appKey);
+
     let userView = new UserView(selector, mainContentSelector);
     let userController = new UserController(userView, requester, baseUrl, appKey);
+
+    let songView = new SongView(selector, mainContentSelector);
+    let songController = new SongController(songView, requester, baseUrl, appKey);
 
     initEventServices();
 
     onRoute("#/",
         function () {
-        // Check if user is logged in and if its not show the guest page, otherwise show the user page...
-        if(!authService.isLoggedIn()){
-            homeController.showGuestPage();
-        }
-        else{
-           homeController.showUserPage();
-        }
+            // Check if user is logged in and if its not show the guest page, otherwise show the user page...
+            if (!authService.isLoggedIn()) {
+                homeController.showGuestPage();
+            }
+            else {
+                homeController.showUserPage();
+            }
+        });
+
+    onRoute("#/create-song", function () {
+        console.log('SSSSs');
+        songController.showCreateSongPage(authService.isLoggedIn());
     });
 
     onRoute("#/login", function () {
@@ -52,6 +60,7 @@
         userController.logout();
     });
 
+
     bindEventHandler('login', function (ev, data) {
         userController.login(data);
     });
@@ -60,6 +69,11 @@
         // Register a new user...
         userController.register(data);
     });
+
+    bindEventHandler('createSong', function (ev, data) {
+        songController.createSong(data);
+    });
+
 
     run('#/');
 })();
