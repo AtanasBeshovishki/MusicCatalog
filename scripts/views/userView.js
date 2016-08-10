@@ -1,11 +1,16 @@
 class UserView {
-    constructor(wrapperSelector, mainContentSelector) {
+    constructor(wrapperSelector, navBarSelector) {
         this._wrapperSelector = wrapperSelector;
-        this._mainContentSelector = mainContentSelector;
+        this._navBarSelector = navBarSelector;
     }
 
     showLoginPage(isLoggedIn) {
         let _that = this;
+
+        $.get("templates/navbarUser.html", function (template) {
+            let rendered = Mustache.render(template, null);
+            $(_that._navBarSelector).html(rendered);
+        });
 
         $.get('templates/login.html', function (template) {
             let rendered = Mustache.render(template, null);

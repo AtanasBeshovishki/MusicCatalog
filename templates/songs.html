@@ -1,10 +1,26 @@
-{{#blogPosts}}
-<li class="single-post">
-    <article id="post-{{postId}}">
-        <div class="dot">&nbsp;</div>
-        <h3 class="title">{{title}}</h3>
-        <p class="subtitle">Posted on {{date}} by {{author}}</p>
-        <p class="content">{{content}}</p>
-    </article>
-</li>
-{{/blogPosts}}
+<table class="table">
+
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Url</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#songs}}
+    <tr id="song-{{songId}}">
+        <td class="title">{{title}}</td>
+        <td class="description">{{description}}</td>
+        <!--<td class="file"><a href="#" onclick="window.location.replace('{{file}}')">{{file}}</a></td>-->
+        <td class="file"><a href="#" onclick="play('{{file}}')">{{file}}</a></td>
+    </tr>
+    {{/songs}}
+    </tbody>
+</table>
+<script>
+
+    function play(n) {
+        alert(n);
+    }
+</script>

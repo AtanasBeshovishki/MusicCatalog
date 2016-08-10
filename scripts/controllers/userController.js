@@ -42,8 +42,7 @@ class UserController {
         console.log(this._baseServiceUrl, requestData);
 
         this._requester.post(this._baseServiceUrl, requestData,
-            function success(response) {
-                // console.log(response);
+            function success() {
                 showPopup('success', "You have successfully registered.");
                 redirectUrl("#/login");
             },
@@ -65,9 +64,12 @@ class UserController {
                 sessionStorage['fullName'] = data.fullName;
 
                 redirectUrl("#/");
+
             },
+
             function error(data) {
-                showPopup('error', "An error has occurred while attempting to login.")
+                showPopup('error', "An error has occurred while attempting to login.");
+                this._userView.show('createSong');
             });
     }
 

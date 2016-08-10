@@ -1,53 +1,70 @@
 class HomeView {
-    constructor(wrapperSelector, mainContentSelector) {
+    constructor(wrapperSelector, navBarSelector) {
         this._wrapperSelector = wrapperSelector;
-        this._mainContentSelector = mainContentSelector;
+        this._navBarSelector = navBarSelector;
     }
 
-    showGuestPage() {
+    showGuestPage(data) {
         let _that = this;
 
         $.get('templates/welcome-guest.html', function (template) {
             let renderedWrapper = Mustache.render(template, null);
             $(_that._wrapperSelector).html(renderedWrapper);
+
+            // $.get('templates/songs.html', function (template) {
+            //     console.log("wwww");
+            //     let catalogSongs = {
+            //         catalogSongs: data
+            //     };
+            //     console.log("qqqq");
+            //     let renderedSongs = Mustache.render(template, catalogSongs);
+            //     $('.articles').html(renderedSongs);
+            //     console.log("wwww");
+            // });
         });
+
+        $.get('templates/navbarGuest.html', function (template) {
+            let renderedContent = Mustache.render(template, null);
+            $(_that._navBarSelector).html(renderedContent); ///////////
+
+        });
+
+
     }
 
-    showUserPage() {
+    showUserPage(data) {
         let _that = this;
 
         $.get('templates/welcome-user.html', function (template) {
             let rendered = Mustache.render(template, null);
             $(_that._wrapperSelector).html(rendered);
+
+
+            $.get('templates/playLists.html', function (template) {
+                let templateVars = {
+                    playLists: data
+
+                };
+                let renderedSongs = Mustache.render(template, templateVars);
+                $('#playLists').html(renderedSongs);
+
+
+            });
+            $.get('templates/songs.html', function (template) {
+                let templateVars = {
+                    songs: data
+
+                };
+                let renderedSongs = Mustache.render(template, templateVars);
+                $('#songs').html(renderedSongs);
+            });
+
+        });
+
+        $.get('templates/navbarUser.html', function (template) {
+            let renderedContent = Mustache.render(template, null);
+            $(_that._navBarSelector).html(renderedContent);
+
         });
     }
-
-//    showUserPage(sideBarData, mainData){
-//
-//        let _that = this;
-//
-//        $.get('templates/welcome-user.html', function (template) {
-//            let renderedWrapper = Mustache.render(template, null);
-//
-//            $(_that._wrapperSelector).html(renderedWrapper);
-//
-//            $.get('templates/posts.html', function (template) {
-//                let blogPosts = {
-//                    blogPosts: mainData
-//                };
-//                let renderedPosts = Mustache.render(template, blogPosts);
-//                $('.articles').html(renderedPosts);
-//            });
-//
-//            $.get('templates/recent-posts.html', function (template) {
-//                let recentPosts = {
-//                    recentPosts: sideBarData
-//                };
-//                let renderedRecentPosts = Mustache.render(template, recentPosts);
-//                $('.recent-posts').html(renderedRecentPosts);
-//
-//
-//            });
-//        });
-//    }
 }

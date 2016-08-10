@@ -3,12 +3,14 @@ class SongController {
         this._songView = songView;
         this.requester = requester;
         this._appKey = appKey;
-        this._baseServiceUrl = baseUrl + "/appdata/" + appKey + "/songs";
+        this._baseServiceUrl = baseUrl + "/appdata/" + appKey + "/";
     }
 
     showCreateSongPage() {
-        console.log('SSSSs');
+
+
         this._songView.showCreateSongPage();
+
     }
 
     createSong(data) {
@@ -22,7 +24,7 @@ class SongController {
         //     return;
         // }
         //
-        let requestUrl = this._baseServiceUrl;
+        let requestUrl = this._baseServiceUrl + "songs";
 
         this.requester.post(requestUrl, data,
             function success(data) {
@@ -33,4 +35,22 @@ class SongController {
                 showPopup('error', "An error has occurred while attempting to create a new song.");
             });
     }
+
+    showCreatePlayListPage() {
+        this._songView.showCreatePlayListPage()
+    }
+
+    createPlayList(data) {
+
+        let requestUrl = this._baseServiceUrl + "playLists";
+        this.requester.post(requestUrl, data,
+            function success(data) {
+                showPopup('success', "You have successfully create a play list.");
+                redirectUrl("#/");
+            },
+            function error(data) {
+                showPopup('error', "An error has occurred while attempting to create a play list.");
+            });
+    }
+
 }

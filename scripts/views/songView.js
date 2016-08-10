@@ -1,28 +1,30 @@
 class SongView {
-    constructor(wrapperSelector, mainContentSelector) {
+    constructor(wrapperSelector, navBarSelector) {
         this._wrapperSelector = wrapperSelector;
-        this._mainContentSelector = mainContentSelector;
+        this._navBarSelector = navBarSelector;
     }
 
     showCreateSongPage() {
-        console.log('zzz');
+
         let _that = this;
         let templateUrl;
 
-        // if(isLoggedIn){
+
         templateUrl = "templates/create-song.html";
-        // }
-        // else{
-        //     templateUrl = "templates/welcome-guest.html";
-        // }
+
+
+        $.get("templates/navbarUser.html", function (template) {
+            let rendered = Mustache.render(template, null);
+            $(_that._navBarSelector).html(rendered);
+        });
 
         $.get(templateUrl, function (template) {
             let rendered = Mustache.render(template, null);
             $(_that._wrapperSelector).html(rendered);
 
-            // $('#author').val(data.fullName);
 
             $('#create-song-button').on('click', function (ev) {
+
                 let title = $('#title').val();
                 let description = $('#description').val();
                 let file = $('#file').val();
@@ -39,8 +41,41 @@ class SongView {
                 triggerEvent('createSong', data);
 
             });
-        });
-        // });
 
+        });
+
+    }
+
+    showCreatePlayListPage() {
+        let _that = this;
+        let templateUrl;
+            templateUrl = "templates/create-playList.html";
+
+        $.get("templates/navbarUser.html", function (template) {
+            let rendered = Mustache.render(template, null);
+            $(_that._navBarSelector).html(rendered);
+        });
+
+        $.get(templateUrl, function (template) {
+            let rendered = Mustache.render(template, null);
+            $(_that._wrapperSelector).html(rendered);
+
+
+            $('#create-playList-button').on('click', function (ev) {
+
+                let title = $('#title').val();
+                let date = moment().format("MMMM Do YYYY");
+
+
+                let data = {
+                    title: title,
+                    date: date
+                };
+
+                triggerEvent('createPlayList', data);
+
+            });
+
+        });
     }
 }

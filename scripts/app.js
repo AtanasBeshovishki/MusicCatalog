@@ -18,16 +18,17 @@
     let requester = new Requester(authService);
 
     let selector = ".wrapper";
-    let mainContentSelector = ".main-content";
+    // let mainContentSelector = ".main-content";
+    let navBarSelector = ".navBarSelector";
     // Create HomeView, HomeController, UserView, UserController, PostView and PostController
 
-    let homeView = new HomeView(selector, mainContentSelector);
+    let homeView = new HomeView(selector, navBarSelector);
     let homeController = new HomeController(homeView, requester, baseUrl, appKey);
 
-    let userView = new UserView(selector, mainContentSelector);
+    let userView = new UserView(selector, navBarSelector);
     let userController = new UserController(userView, requester, baseUrl, appKey);
 
-    let songView = new SongView(selector, mainContentSelector);
+    let songView = new SongView(selector, navBarSelector);
     let songController = new SongController(songView, requester, baseUrl, appKey);
 
     initEventServices();
@@ -43,10 +44,7 @@
             }
         });
 
-    onRoute("#/create-song", function () {
-        console.log('SSSSs');
-        songController.showCreateSongPage(authService.isLoggedIn());
-    });
+
 
     onRoute("#/login", function () {
         userController.showLoginPage(authService.isLoggedIn());
@@ -60,6 +58,21 @@
         userController.logout();
     });
 
+    onRoute("#/create-song", function () {
+        if(!authService.isLoggedIn()){
+            homeController.showGuestPage();
+        }else {
+            songController.showCreateSongPage(authService.isLoggedIn());
+        }
+    });
+
+    onRoute("#/create-playList", function () {
+        if(!authService.isLoggedIn()){
+            homeController.showGuestPage();
+        }else {
+            songController.showCreatePlayListPage(authService.isLoggedIn());
+        }
+    });
 
     bindEventHandler('login', function (ev, data) {
         userController.login(data);
@@ -72,6 +85,10 @@
 
     bindEventHandler('createSong', function (ev, data) {
         songController.createSong(data);
+    });
+
+    bindEventHandler('createPlayList', function (ev, data) {
+        songController.createPlayList(data);
     });
 
 
