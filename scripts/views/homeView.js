@@ -39,26 +39,6 @@ class HomeView {
             let rendered = Mustache.render(template, null);
             $(_that._wrapperSelector).html(rendered);
 
-
-            $.get('templates/playLists.html', function (template) {
-                let templateVars = {
-                    playLists: data
-
-                };
-                let renderedSongs = Mustache.render(template, templateVars);
-                $('#playLists').html(renderedSongs);
-
-
-            });
-            $.get('templates/songs.html', function (template) {
-                let templateVars = {
-                    songs: data
-
-                };
-                let renderedSongs = Mustache.render(template, templateVars);
-                $('#songs').html(renderedSongs);
-            });
-
         });
 
         $.get('templates/navbarUser.html', function (template) {

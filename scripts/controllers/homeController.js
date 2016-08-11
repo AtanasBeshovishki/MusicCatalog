@@ -21,7 +21,7 @@ class HomeController {
 
         let catalogPlayLists = [];
 
-        // _that._homeView.showUserPage(null, null);
+        _that._homeView.showUserPage();
 
 
         let requestUrl = this._baseServiceUrl + "/appdata/" + this._appKey + "/";
@@ -38,19 +38,28 @@ class HomeController {
                 let currentId = 1;
 
                 for (let i = 0; i < data.length && i < 5; i++) {
-                    data[i].playListsId = currentId;
+                    data[i].playListId = currentId;
                     currentId++;
                     catalogPlayLists.push(data[i]);
                 }
 
-                _that._homeView.showUserPage(catalogPlayLists, data);
+                //@TODO : Create view function
+                //  _that._homeView.snowPlaylistsTable(catalogPlayLists);
+                $.get('templates/playLists.html', function (template) {
+                    let templateVarsP = {
+                        playLists: catalogPlayLists //data
+                    };
+                    let renderedPlayLists = Mustache.render(template, templateVarsP);
+                    $('#playLists').html(renderedPlayLists);
+                });
+
             },
             function error(data) {
                 showPopup('error', "Error loading play lists!");
             });
 
         this._requester.get(requestUrl + "songs",
-            function successPlay(data) {
+            function success(data) {
 
                 data.sort(function (elem1, elem2) {
                     let date1 = new Date(elem1._kmd.ect);
@@ -66,12 +75,19 @@ class HomeController {
                     catalogSongs.push(data[i]);
                 }
 
-                _that._homeView.showUserPage(catalogSongs, data);
+                $.get('templates/songs.html', function (template) {
+                    let templateVarsS = {
+                        songs: catalogSongs
+                    };
+                    let renderedSongs = Mustache.render(template, templateVarsS);
+                    $('#songs').html(renderedSongs);
+                });
+
             },
+
             function error(data) {
                 showPopup('error', "Error loading songs!");
             });
-
 
     }
 

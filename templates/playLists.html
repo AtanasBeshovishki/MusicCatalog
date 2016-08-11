@@ -1,14 +1,18 @@
 <table class="table">
     <thead>
     <tr>
+        <th colspan="2">Play lists</th>
+    </tr>
+    <tr>
         <th>Title</th>
+        <th colspan="1"> </th>
     </tr>
     </thead>
     <tbody>
     {{#playLists}}
     <tr id="playList-{{playListId}}">
         <td class="titlePlayList"><a href="#" onclick="play('{{title}}')">{{title}}</a></td>
-        </tr>
+    </tr>
     {{/playLists}}
     </tbody>
 </table>
