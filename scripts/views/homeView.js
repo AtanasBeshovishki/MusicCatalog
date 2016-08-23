@@ -25,7 +25,7 @@ class HomeView {
 
         $.get('templates/navbarGuest.html', function (template) {
             let renderedContent = Mustache.render(template, null);
-            $(_that._navBarSelector).html(renderedContent); ///////////
+            $(_that._navBarSelector).html(renderedContent);
 
         });
 
@@ -41,10 +41,34 @@ class HomeView {
 
         });
 
+
         $.get('templates/navbarUser.html', function (template) {
             let renderedContent = Mustache.render(template, null);
             $(_that._navBarSelector).html(renderedContent);
 
         });
     }
+
+    showPlayListsTable(catalogPlayLists) {
+
+        $.get('templates/playLists.html', function (template) {
+            let templateVarsP = {
+                playLists: catalogPlayLists //data
+            };
+            let renderedPlayLists = Mustache.render(template, templateVarsP);
+            $('#playLists').html(renderedPlayLists);
+        });
+    }
+
+    showSongsTable(catalogSongs) {
+
+        $.get('templates/songs.html', function (template) {
+            let templateVars = {
+                songs: catalogSongs
+            };
+            let renderedSongs = Mustache.render(template, templateVars);
+            $('#songs').html(renderedSongs);
+        });
+    }
+
 }

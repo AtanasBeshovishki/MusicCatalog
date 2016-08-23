@@ -43,15 +43,8 @@ class HomeController {
                     catalogPlayLists.push(data[i]);
                 }
 
-                //@TODO : Create view function
-                //  _that._homeView.snowPlaylistsTable(catalogPlayLists);
-                $.get('templates/playLists.html', function (template) {
-                    let templateVarsP = {
-                        playLists: catalogPlayLists //data
-                    };
-                    let renderedPlayLists = Mustache.render(template, templateVarsP);
-                    $('#playLists').html(renderedPlayLists);
-                });
+                //TODO : Create view function
+                _that._homeView.showPlayListsTable(catalogPlayLists);
 
             },
             function error(data) {
@@ -75,13 +68,7 @@ class HomeController {
                     catalogSongs.push(data[i]);
                 }
 
-                $.get('templates/songs.html', function (template) {
-                    let templateVarsS = {
-                        songs: catalogSongs
-                    };
-                    let renderedSongs = Mustache.render(template, templateVarsS);
-                    $('#songs').html(renderedSongs);
-                });
+                _that._homeView.showSongsTable(catalogSongs);
 
             },
 

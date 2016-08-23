@@ -33,17 +33,15 @@
 
     initEventServices();
 
-    onRoute("#/",
-        function () {
-            // Check if user is logged in and if its not show the guest page, otherwise show the user page...
-            if (!authService.isLoggedIn()) {
-                homeController.showGuestPage();
-            }
-            else {
-                homeController.showUserPage();
-            }
-        });
-
+    onRoute("#/", function () {
+        // Check if user is logged in and if its not show the guest page, otherwise show the user page...
+        if (!authService.isLoggedIn()) {
+            homeController.showGuestPage();
+        }
+        else {
+            homeController.showUserPage();
+        }
+    });
 
 
     onRoute("#/login", function () {
@@ -59,19 +57,29 @@
     });
 
     onRoute("#/create-song", function () {
-        if(!authService.isLoggedIn()){
+        if (!authService.isLoggedIn()) {
             homeController.showGuestPage();
-        }else {
+        } else {
             songController.showCreateSongPage(authService.isLoggedIn());
         }
     });
 
     onRoute("#/create-playList", function () {
-        if(!authService.isLoggedIn()){
+        if (!authService.isLoggedIn()) {
             homeController.showGuestPage();
-        }else {
+        } else {
             songController.showCreatePlayListPage(authService.isLoggedIn());
         }
+    });
+
+    onRoute("#/editSong", function () {
+        songController.showEditSongPage(authService.isLoggedIn());
+
+    });
+
+    onRoute("#/editPlayList", function () {
+        songController.showEditPlayListPage(authService.isLoggedIn());
+
     });
 
     bindEventHandler('login', function (ev, data) {
@@ -91,6 +99,13 @@
         songController.createPlayList(data);
     });
 
+    bindEventHandler('editSong', function (ev, data) {
+        songController.editSong(data);
+    });
+
+    bindEventHandler('editPlayList', function (ev, data) {
+        songController.editPlayList(data);
+    });
 
     run('#/');
 })();

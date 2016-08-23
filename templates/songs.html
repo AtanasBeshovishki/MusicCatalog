@@ -17,10 +17,10 @@
     <tr id="song-{{songId}}">
         <td class="title">{{title}}</td>
         <td class="description">{{description}}</td>
-        <!--<td class="file"><a href="#" onclick="window.location.replace('{{file}}')">{{file}}</a></td>-->
-        <td class="file"><a href="#" onclick="play('{{file}}')">{{file}}</a></td>
-        <td><button type="button" class="btn btn-primary" id="edit">Edit</button></td>
-        <td><button type="button" class="btn btn-primary" id="delete">Delete</button></td>
+        <td class="file"><a href="#" onclick="window.open('{{file}}')">{{file}}</a></td>
+        <!--<td class="file"><a href="#" onclick="play('{{file}}')">{{file}}</a></td>-->
+        <td><a class="btn btn-primary" href="#/editSong">Edit</a></td>
+        <td><button type="button" class="btn btn-primary" id="deleteSong">Delete</button></td>
     </tr>
     {{/songs}}
     </tbody>
@@ -30,4 +30,5 @@
     function play(n) {
         alert(n);
     }
+
 </script>

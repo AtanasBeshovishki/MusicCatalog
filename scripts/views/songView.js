@@ -78,4 +78,82 @@ class SongView {
 
         });
     }
+
+    showEditSongPage() {
+        let _that = this;
+        let templateUrl;
+        // templateUrl = "templates/editSong.html";
+
+        $.get("templates/navbarUser.html", function (template) {
+            let rendered = Mustache.render(template, null);
+            $(_that._navBarSelector).html(rendered);
+        });
+
+        $.get("templates/editSong.html", function (template) {
+            let rendered = Mustache.render(template, null);
+            $(_that._wrapperSelector).html(rendered);
+
+
+
+            $('#edit-song-button').on('click', function (ev) {
+
+                let title = $('#title').val();
+                let date = moment().format("MMMM Do YYYY");
+
+
+                let data = {
+                    title: title,
+                    description:description,
+                    file:file
+                };
+                $.getById(title);
+
+                triggerEvent('editSong', data);
+
+            });
+
+            $('#cancel-song-button').on('click', function (ev) {
+                redirectUrl('#/')
+            })
+
+
+        });
+    }
+
+    showEditPlayListPage() {
+        let _that = this;
+        let templateUrl;
+        // templateUrl = "templates/editSong.html";
+
+        $.get("templates/navbarUser.html", function (template) {
+            let rendered = Mustache.render(template, null);
+            $(_that._navBarSelector).html(rendered);
+        });
+
+        $.get("templates/editPlayList.html", function (template) {
+            let rendered = Mustache.render(template, null);
+            $(_that._wrapperSelector).html(rendered);
+
+
+            $('#editPlayList').on('click', function (ev) {
+
+                let title = $('#title').val();
+                let date = moment().format("MMMM Do YYYY");
+
+                //
+                // let data = {
+                //     title: title,
+                //     date: date
+                // };
+
+                // triggerEvent('editSong', data);
+
+            });
+
+            $('#cancel-song-button').on('click', function (ev) {
+                redirectUrl('#/')
+            })
+
+        });
+    }
 }

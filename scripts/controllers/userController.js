@@ -37,7 +37,6 @@ class UserController {
         }
 
         delete requestData['confirmPassword'];
-        // let requestUrl = this._baseServiceUrl;
 
         console.log(this._baseServiceUrl, requestData);
 
@@ -69,7 +68,6 @@ class UserController {
 
             function error(data) {
                 showPopup('error', "An error has occurred while attempting to login.");
-                this._userView.show('createSong');
             });
     }
 

@@ -52,5 +52,37 @@ class SongController {
                 showPopup('error', "An error has occurred while attempting to create a play list.");
             });
     }
+    showEditSongPage(){
+    this._songView.showEditSongPage()
 
+}
+
+    editSong(data) {
+        let requestUrl = this._baseServiceUrl + "songs";
+
+        this.requester.post(requestUrl, data,
+            function success(data) {
+                showPopup('success', "You have successfully create a play list.");
+                redirectUrl("#/");
+            },
+            function error(data) {
+                showPopup('error', "An error has occurred while attempting to create a play list.");
+            });
+    }
+
+    showEditPlayListPage(){
+        this._songView.showEditPlayListPage()
+    }
+
+    editPlayList(data) {
+        let requestUrl = this._baseServiceUrl + "editPlayList";
+        this.requester.post(requestUrl, data,
+            function success(data) {
+                showPopup('success', "You have successfully create a play list.");
+                redirectUrl("#/");
+            },
+            function error(data) {
+                showPopup('error', "An error has occurred while attempting to create a play list.");
+            });
+    }
 }
