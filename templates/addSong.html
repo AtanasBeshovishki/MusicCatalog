@@ -1,0 +1,26 @@
+<table class="table">
+    <thead>
+    <tr>
+        <th colspan="3">Play lists</th>
+    </tr>
+    <tr>
+        <th>Title</th>
+        <th colspan="2"></th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#playLists}}
+    <tr id="playList-{{playListId}}">
+        <td class="titlePlayList"><a href="#"
+                                     onclick="play('{{title}}')">{{title}}</a></td>
+        <td><a class="btn btn-primary" href="#/editPlayList/{{_id}}">Edit</a></td>
+        <td><a class="btn btn-primary" href="#/deletePlaylist/{{_id}}">Delete</a></td>
+    </tr>
+    {{/playLists}}
+    </tbody>
+</table>
+<script>
+    function play(n) {
+        alert(n);
+    }
+</script>

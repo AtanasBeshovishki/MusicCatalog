@@ -76,14 +76,16 @@
         songController.showEditSongPage(this.params['id']);
     });
 
+    onRoute("#/editPlayList/:id", function (da) {
+        songController.showEditPlayListPage(this.params['id']);
+    });
+
     onRoute("#/deleteSong/:id", function () {
         songController.showDeleteSongPage(this.params['id']);
     });
 
-
-
-    onRoute("#/editPlayList/:id", function (da) {
-        songController.showEditPlayListPage(this.params['id']);
+    onRoute("#/deletePlaylist/:id", function (da) {
+        songController.showDeletePlaylistPage(this.params['id']);
     });
 
     bindEventHandler('login', function (ev, data) {
@@ -113,6 +115,10 @@
 
     bindEventHandler('deleteSong', function (ev, data) {
         songController.deleteSong(data);
+    });
+
+    bindEventHandler('deletePlaylist', function (ev, data) {
+        songController.deletePlaylist(data);
     });
 
     run('#/');

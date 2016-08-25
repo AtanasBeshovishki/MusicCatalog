@@ -3,13 +3,13 @@
 
     <thead>
     <tr>
-        <th colspan="5">Songs</th>
+        <th colspan="6">Songs</th>
     </tr>
     <tr>
         <th>Title</th>
         <th>Description</th>
         <th>Url</th>
-        <th colspan="2"> </th>
+        <th colspan="3"> </th>
     </tr>
     </thead>
     <tbody>
@@ -18,7 +18,7 @@
         <td class="title">{{title}}</td>
         <td class="description">{{description}}</td>
         <td class="file"><a href="#" onclick="window.open('{{file}}')">{{file}}</a></td>
-        <!--<td class="file"><a href="#" onclick="play('{{file}}')">{{file}}</a></td>-->
+        <td><a class="btn btn-primary" href="#/addSong/{{_id}}">Add to playlist</a></td>
         <td><a class="btn btn-primary" href="#/editSong/{{_id}}">Edit</a></td>
         <td><a class="btn btn-primary" href="#/deleteSong/{{_id}}">Delete</a></td>
     </tr>

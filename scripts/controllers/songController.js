@@ -120,4 +120,31 @@ class SongController {
                 showPopup('error', "An error has occurred while attempting to deleted song.");
             });
     }
+
+    showDeletePlaylistPage(id){
+        let requestUrl = this._baseServiceUrl + "playLists";
+
+        let _that = this;
+
+        this.requester.get(requestUrl + "/" + id,  function success(data) {
+                _that._songView.showDeletePlaylistPage(id, data);
+            },
+            function error(data) {
+                showPopup('error', "Error loading playList!");
+            }
+        );
+    }
+
+    deletePlaylist(data){
+        let requestUrl = this._baseServiceUrl + "playLists";
+
+        this.requester.delete(requestUrl + "/" + data["id"], data,
+            function success(data) {
+                showPopup('success', "You have successfully deleted playlist.");
+                redirectUrl("#/");
+            },
+            function error(data) {
+                showPopup('error', "An error has occurred while attempting to deleted playlist.");
+            });
+    }
 }

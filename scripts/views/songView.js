@@ -41,7 +41,7 @@ class SongView {
                 triggerEvent('createSong', data);
 
             });
-            $('#cancel-song-button').on('click', function (ev) {
+            $('#cancel-button').on('click', function (ev) {
                 redirectUrl('#/')
             });
 
@@ -79,7 +79,7 @@ class SongView {
                 triggerEvent('createPlayList', data);
 
             });
-            $('#cancel-song-button').on('click', function (ev) {
+            $('#cancel-button').on('click', function (ev) {
                 redirectUrl('#/')
             });
 
@@ -117,7 +117,7 @@ class SongView {
                 triggerEvent('editSong', item);
             });
 
-            $('#cancel-song-button').on('click', function (ev) {
+            $('#cancel-button').on('click', function (ev) {
                 redirectUrl('#/')
             });
         });
@@ -150,7 +150,7 @@ class SongView {
                 triggerEvent('editPlayList', item);
             });
 
-            $('#cancel-song-button').on('click', function (ev) {
+            $('#cancel-button').on('click', function (ev) {
                 redirectUrl('#/')
             });
         });
@@ -171,19 +171,42 @@ class SongView {
 
             $('#delete-song-button').on('click', function (ev) {
 
-                let title = $('#title').val();
-                let date = moment().format("MMMM Do YYYY");
-
                 let item = {
-                    id: id,
-                    title:title,
-                    date:date
+                    id: id
                 };
 
                 triggerEvent('deleteSong', item);
             });
 
-            $('#cancel-song-button').on('click', function (ev) {
+            $('#cancel-button').on('click', function (ev) {
+                redirectUrl('#/')
+            });
+        });
+    }
+
+    showDeletePlaylistPage(id, data){
+        let _that = this;
+
+        $.get("templates/navbarUser.html", function (template) {
+            let rendered = Mustache.render(template, null);
+            $(_that._navBarSelector).html(rendered);
+        });
+
+        $.get("templates/deletePlaylist.html", function (template) {
+            let rendered = Mustache.render(template, data);
+
+            $(_that._wrapperSelector).html(rendered);
+
+            $('#delete-playlist-button').on('click', function (ev) {
+
+                let item = {
+                    id: id
+                };
+
+                triggerEvent('deletePlaylist', item);
+            });
+
+            $('#cancel-button').on('click', function (ev) {
                 redirectUrl('#/')
             });
         });
