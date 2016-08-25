@@ -1,9 +1,6 @@
 .registerForm, .loginForm, .createSong{
     width: 900px;
 }
-/*.form-group{*/
-    /*padding-top: 40px;*/
-/*}*/
 
 .titleCreate{
     padding-bottom: 20px;
@@ -23,7 +20,11 @@ tr:hover {
     color: darkblue;
     padding: 20px;
 }
-
+.titleDelete{
+    padding-bottom: 20px;
+    text-align: center;
+    color: red;
+}
 /*.navbar-brand{*/
     /*text-align: right;*/
 /*}*/

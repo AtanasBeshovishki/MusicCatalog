@@ -7,23 +7,10 @@ class SongController {
     }
 
     showCreateSongPage() {
-
-
         this._songView.showCreateSongPage();
-
     }
 
     createSong(data) {
-        // if(requestData.title.length < 10) {
-        //     showPopup('error', "Post title must consist of at least 10 symbols.");
-        //     return;
-        // }
-        //
-        // if(requestData.content.length < 50){
-        //     showPopup('error', "Post content must consist of at least 50 symbols.");
-        //     return;
-        // }
-        //
         let requestUrl = this._baseServiceUrl + "songs";
 
         this.requester.post(requestUrl, data,
@@ -52,37 +39,85 @@ class SongController {
                 showPopup('error', "An error has occurred while attempting to create a play list.");
             });
     }
-    showEditSongPage(){
-    this._songView.showEditSongPage()
 
-}
-
-    editSong(data) {
+    showEditSongPage(id){
         let requestUrl = this._baseServiceUrl + "songs";
 
-        this.requester.post(requestUrl, data,
+        let _that = this;
+
+        this.requester.get(requestUrl + "/" + id,  function success(data) {
+                _that._songView.showEditSongPage(id, data);
+            },
+            function error(data) {
+                showPopup('error', "Error loading Songs!");
+            }
+        );
+    }
+
+    editSong(data){
+        let requestUrl = this._baseServiceUrl + "songs";
+
+        this.requester.put(requestUrl + "/" + data["id"], data,
             function success(data) {
-                showPopup('success', "You have successfully create a play list.");
+                showPopup('success', "You have successfully modified the song.");
                 redirectUrl("#/");
             },
             function error(data) {
-                showPopup('error', "An error has occurred while attempting to create a play list.");
+                showPopup('error', "An error has occurred while attempting to modify the song.");
             });
     }
 
-    showEditPlayListPage(){
-        this._songView.showEditPlayListPage()
+    showEditPlayListPage(id) {
+    	let requestUrl = this._baseServiceUrl + "playLists";
+
+    	let _that = this;
+
+    	this.requester.get(requestUrl + "/" + id,  function success(data) {
+        		_that._songView.showEditPlayListPage(id, data);
+            },
+            function error(data) {
+               showPopup('error', "Error loading Playlist!");
+            }
+        );
     }
 
     editPlayList(data) {
-        let requestUrl = this._baseServiceUrl + "editPlayList";
-        this.requester.post(requestUrl, data,
+        let requestUrl = this._baseServiceUrl + "playLists";
+
+        this.requester.put(requestUrl + "/" + data["id"], data,
             function success(data) {
-                showPopup('success', "You have successfully create a play list.");
+                showPopup('success', "You have successfully modified the play list.");
                 redirectUrl("#/");
             },
             function error(data) {
-                showPopup('error', "An error has occurred while attempting to create a play list.");
+                showPopup('error', "An error has occurred while attempting to modify the play list.");
+            });
+    }
+
+    showDeleteSongPage(id){
+        let requestUrl = this._baseServiceUrl + "songs";
+
+        let _that = this;
+
+        this.requester.get(requestUrl + "/" + id,  function success(data) {
+                _that._songView.showDeleteSongPage(id, data);
+            },
+            function error(data) {
+                showPopup('error', "Error loading song!");
+            }
+        );
+    }
+
+    deleteSong(data){
+        let requestUrl = this._baseServiceUrl + "songs";
+
+        this.requester.delete(requestUrl + "/" + data["id"], data,
+            function success(data) {
+                showPopup('success', "You have successfully deleted song.");
+                redirectUrl("#/");
+            },
+            function error(data) {
+                showPopup('error', "An error has occurred while attempting to deleted song.");
             });
     }
 }

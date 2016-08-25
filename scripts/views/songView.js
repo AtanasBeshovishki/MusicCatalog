@@ -41,6 +41,10 @@ class SongView {
                 triggerEvent('createSong', data);
 
             });
+            $('#cancel-song-button').on('click', function (ev) {
+                redirectUrl('#/')
+            });
+
 
         });
 
@@ -75,14 +79,15 @@ class SongView {
                 triggerEvent('createPlayList', data);
 
             });
+            $('#cancel-song-button').on('click', function (ev) {
+                redirectUrl('#/')
+            });
 
         });
     }
 
-    showEditSongPage() {
+    showEditSongPage(id, data) {
         let _that = this;
-        let templateUrl;
-        // templateUrl = "templates/editSong.html";
 
         $.get("templates/navbarUser.html", function (template) {
             let rendered = Mustache.render(template, null);
@@ -90,40 +95,36 @@ class SongView {
         });
 
         $.get("templates/editSong.html", function (template) {
-            let rendered = Mustache.render(template, null);
+            let rendered = Mustache.render(template, data);
+
             $(_that._wrapperSelector).html(rendered);
-
-
 
             $('#edit-song-button').on('click', function (ev) {
 
                 let title = $('#title').val();
+                let description = $('#description').val();
+                let file = $('#file').val();
                 let date = moment().format("MMMM Do YYYY");
 
-
-                let data = {
-                    title: title,
+                let item = {
+                    id: id,
+                    title:title,
                     description:description,
-                    file:file
+                    file:file,
+                    date:date
                 };
-                $.getById(title);
 
-                triggerEvent('editSong', data);
-
+                triggerEvent('editSong', item);
             });
 
             $('#cancel-song-button').on('click', function (ev) {
                 redirectUrl('#/')
-            })
-
-
+            });
         });
     }
 
-    showEditPlayListPage() {
+    showEditPlayListPage(id, data) {
         let _that = this;
-        let templateUrl;
-        // templateUrl = "templates/editSong.html";
 
         $.get("templates/navbarUser.html", function (template) {
             let rendered = Mustache.render(template, null);
@@ -131,29 +132,60 @@ class SongView {
         });
 
         $.get("templates/editPlayList.html", function (template) {
-            let rendered = Mustache.render(template, null);
+            let rendered = Mustache.render(template, data);
+
             $(_that._wrapperSelector).html(rendered);
 
-
-            $('#editPlayList').on('click', function (ev) {
+            $('#edit-playlist-button').on('click', function (ev) {
 
                 let title = $('#title').val();
                 let date = moment().format("MMMM Do YYYY");
 
-                //
-                // let data = {
-                //     title: title,
-                //     date: date
-                // };
+                let item = {
+                	id: id,
+                	title:title,
+                	date:date
+                };
 
-                // triggerEvent('editSong', data);
-
+                triggerEvent('editPlayList', item);
             });
 
             $('#cancel-song-button').on('click', function (ev) {
                 redirectUrl('#/')
-            })
+            });
+        });
+    }
 
+    showDeleteSongPage(id, data){
+        let _that = this;
+
+        $.get("templates/navbarUser.html", function (template) {
+            let rendered = Mustache.render(template, null);
+            $(_that._navBarSelector).html(rendered);
+        });
+
+        $.get("templates/deleteSong.html", function (template) {
+            let rendered = Mustache.render(template, data);
+
+            $(_that._wrapperSelector).html(rendered);
+
+            $('#delete-song-button').on('click', function (ev) {
+
+                let title = $('#title').val();
+                let date = moment().format("MMMM Do YYYY");
+
+                let item = {
+                    id: id,
+                    title:title,
+                    date:date
+                };
+
+                triggerEvent('deleteSong', item);
+            });
+
+            $('#cancel-song-button').on('click', function (ev) {
+                redirectUrl('#/')
+            });
         });
     }
 }

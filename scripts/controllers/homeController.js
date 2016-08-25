@@ -75,7 +75,6 @@ class HomeController {
             function error(data) {
                 showPopup('error', "Error loading songs!");
             });
-
     }
 
 }

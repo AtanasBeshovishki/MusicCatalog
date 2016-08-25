@@ -72,14 +72,18 @@
         }
     });
 
-    onRoute("#/editSong", function () {
-        songController.showEditSongPage(authService.isLoggedIn());
-
+    onRoute("#/editSong/:id", function () {
+        songController.showEditSongPage(this.params['id']);
     });
 
-    onRoute("#/editPlayList", function () {
-        songController.showEditPlayListPage(authService.isLoggedIn());
+    onRoute("#/deleteSong/:id", function () {
+        songController.showDeleteSongPage(this.params['id']);
+    });
 
+
+
+    onRoute("#/editPlayList/:id", function (da) {
+        songController.showEditPlayListPage(this.params['id']);
     });
 
     bindEventHandler('login', function (ev, data) {
@@ -105,6 +109,10 @@
 
     bindEventHandler('editPlayList', function (ev, data) {
         songController.editPlayList(data);
+    });
+
+    bindEventHandler('deleteSong', function (ev, data) {
+        songController.deleteSong(data);
     });
 
     run('#/');

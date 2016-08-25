@@ -10,17 +10,6 @@ class HomeView {
         $.get('templates/welcome-guest.html', function (template) {
             let renderedWrapper = Mustache.render(template, null);
             $(_that._wrapperSelector).html(renderedWrapper);
-
-            // $.get('templates/songs.html', function (template) {
-            //     console.log("wwww");
-            //     let catalogSongs = {
-            //         catalogSongs: data
-            //     };
-            //     console.log("qqqq");
-            //     let renderedSongs = Mustache.render(template, catalogSongs);
-            //     $('.articles').html(renderedSongs);
-            //     console.log("wwww");
-            // });
         });
 
         $.get('templates/navbarGuest.html', function (template) {
@@ -28,8 +17,6 @@ class HomeView {
             $(_that._navBarSelector).html(renderedContent);
 
         });
-
-
     }
 
     showUserPage(data) {
@@ -41,8 +28,7 @@ class HomeView {
 
         });
 
-
-        $.get('templates/navbarUser.html', function (template) {
+        $.get('templates/navbarUserAfterLogin.html', function (template) {
             let renderedContent = Mustache.render(template, null);
             $(_that._navBarSelector).html(renderedContent);
 
