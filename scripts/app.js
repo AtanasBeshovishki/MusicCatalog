@@ -88,6 +88,10 @@
         songController.showDeletePlaylistPage(this.params['id']);
     });
 
+    onRoute("#/addSong:songs", function (da) {
+        songController.showAddSongPage(this.params['songs']);
+    });
+
     bindEventHandler('login', function (ev, data) {
         userController.login(data);
     });
@@ -119,6 +123,10 @@
 
     bindEventHandler('deletePlaylist', function (ev, data) {
         songController.deletePlaylist(data);
+    });
+
+    bindEventHandler('addSong', function (ev, data) {
+        songController.addSong(data);
     });
 
     run('#/');

@@ -25,6 +25,17 @@ tr:hover {
     text-align: center;
     color: red;
 }
-/*.navbar-brand{*/
-    /*text-align: right;*/
-/*}*/
+
+#delete-song-button{
+    background: red;
+}
+#delete-song-button:hover{
+    background: rgba(244, 29, 30, 0.7);
+}
+#delete-playlist-button{
+    background: red;
+}
+
+#delete-playlist-button:hover{
+    background: rgba(244, 29, 30, 0.7);
+}

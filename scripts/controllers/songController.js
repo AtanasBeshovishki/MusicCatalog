@@ -147,4 +147,50 @@ class SongController {
                 showPopup('error', "An error has occurred while attempting to deleted playlist.");
             });
     }
+
+    showAddSongPage(){
+        let _that = this;
+
+        let catalogSongs = [];
+
+        let requestUrl = this._baseServiceUrl;
+
+        this._requester.get(requestUrl + "songs",
+            function success(data) {
+
+                data.sort(function (elem1, elem2) {
+                    let date1 = new Date(elem1._kmd.ect);
+                    let date2 = new Date(elem2._kmd.ect);
+                    return date2 - date1;
+                });
+
+                let currentId = 1;
+
+                for (let i = 0; i < data.length && i < 5; i++) {
+                    data[i].songId = currentId;
+                    currentId++;
+                    catalogSongs.push(data[i]);
+                }
+
+                //TODO : Create view function
+                _that._songView.showAddSongPage(catalogSongs);
+
+            },
+            function error(data) {
+                showPopup('error', "Error loading play lists!");
+            });
+    }
+
+    addSong(data) {
+        let requestUrl = this._baseServiceUrl + "songs";
+
+        this.requester.put(requestUrl, data,
+            function success(data) {
+                showPopup('success', "You have successfully added song.");
+                redirectUrl("#/");
+            },
+            function error(data) {
+                showPopup('error', "An error has occurred while attempting to add song.");
+            });
+    }
 }

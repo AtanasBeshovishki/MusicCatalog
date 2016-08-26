@@ -53,7 +53,7 @@ class SongView {
     showCreatePlayListPage() {
         let _that = this;
         let templateUrl;
-            templateUrl = "templates/create-playList.html";
+        templateUrl = "templates/create-playList.html";
 
         $.get("templates/navbarUser.html", function (template) {
             let rendered = Mustache.render(template, null);
@@ -108,10 +108,10 @@ class SongView {
 
                 let item = {
                     id: id,
-                    title:title,
-                    description:description,
-                    file:file,
-                    date:date
+                    title: title,
+                    description: description,
+                    file: file,
+                    date: date
                 };
 
                 triggerEvent('editSong', item);
@@ -142,9 +142,9 @@ class SongView {
                 let date = moment().format("MMMM Do YYYY");
 
                 let item = {
-                	id: id,
-                	title:title,
-                	date:date
+                    id: id,
+                    title: title,
+                    date: date
                 };
 
                 triggerEvent('editPlayList', item);
@@ -156,7 +156,7 @@ class SongView {
         });
     }
 
-    showDeleteSongPage(id, data){
+    showDeleteSongPage(id, data) {
         let _that = this;
 
         $.get("templates/navbarUser.html", function (template) {
@@ -184,7 +184,7 @@ class SongView {
         });
     }
 
-    showDeletePlaylistPage(id, data){
+    showDeletePlaylistPage(id, data) {
         let _that = this;
 
         $.get("templates/navbarUser.html", function (template) {
@@ -211,4 +211,16 @@ class SongView {
             });
         });
     }
+
+    showAddSongPage(catalogSongs) {
+
+            $.get('templates/addSong.html', function (template) {
+                let templateVars = {
+                    songs: catalogSongs
+                };
+                let renderedSongs = Mustache.render(template, templateVars);
+                $('#songs').html(renderedSongs);
+            });
+    }
+
 }

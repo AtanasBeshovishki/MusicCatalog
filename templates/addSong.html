@@ -1,26 +1,32 @@
 <table class="table">
+
     <thead>
     <tr>
-        <th colspan="3">Play lists</th>
+        <th colspan="5">Add song</th>
     </tr>
     <tr>
         <th>Title</th>
-        <th colspan="2"></th>
+        <th>Description</th>
+        <th>Url</th>
+        <th colspan="2"> </th>
     </tr>
     </thead>
     <tbody>
-    {{#playLists}}
-    <tr id="playList-{{playListId}}">
-        <td class="titlePlayList"><a href="#"
-                                     onclick="play('{{title}}')">{{title}}</a></td>
-        <td><a class="btn btn-primary" href="#/editPlayList/{{_id}}">Edit</a></td>
-        <td><a class="btn btn-primary" href="#/deletePlaylist/{{_id}}">Delete</a></td>
+    {{#songs}}
+    <tr id="song-{{songId}}">
+        <td class="title">{{title}}</td>
+        <td class="description">{{description}}</td>
+        <td class="file"><a href="#" onclick="window.open('{{file}}')">{{file}}</a></td>
+
+        <td><button type="button" class="btn btn-primary" id="add-song-button">Add</button></td>
     </tr>
-    {{/playLists}}
+    {{/songs}}
     </tbody>
 </table>
 <script>
+
     function play(n) {
         alert(n);
     }
+
 </script>
