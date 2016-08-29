@@ -28,28 +28,30 @@ class HomeView {
 
         });
 
-        $.get('templates/navbarUserAfterLogin.html', function (template) {
+        $.get('templates/navbarUser.html', function (template) {
             let renderedContent = Mustache.render(template, null);
             $(_that._navBarSelector).html(renderedContent);
 
         });
     }
 
-    showPlayListsTable(catalogPlayLists) {
+    showPlayListsTable(title = "Playlist", catalogPlayLists) {
 
         $.get('templates/playLists.html', function (template) {
             let templateVarsP = {
-                playLists: catalogPlayLists //data
+                title : title,
+                playLists: catalogPlayLists
             };
             let renderedPlayLists = Mustache.render(template, templateVarsP);
             $('#playLists').html(renderedPlayLists);
         });
     }
 
-    showSongsTable(catalogSongs) {
+    showSongsTable(title = "Songs", catalogSongs) {
 
         $.get('templates/songs.html', function (template) {
             let templateVars = {
+                title : title,
                 songs: catalogSongs
             };
             let renderedSongs = Mustache.render(template, templateVars);

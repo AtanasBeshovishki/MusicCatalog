@@ -23,7 +23,6 @@ class HomeController {
 
         _that._homeView.showUserPage();
 
-
         let requestUrl = this._baseServiceUrl + "/appdata/" + this._appKey + "/";
 
         this._requester.get(requestUrl + "playLists",
@@ -35,20 +34,16 @@ class HomeController {
                     return date2 - date1;
                 });
 
-                let currentId = 1;
-
-                for (let i = 0; i < data.length && i < 5; i++) {
-                    data[i].playListId = currentId;
-                    currentId++;
+                for (let i = 0; i < data.length && i < 3; i++) {
                     catalogPlayLists.push(data[i]);
                 }
 
                 //TODO : Create view function
-                _that._homeView.showPlayListsTable(catalogPlayLists);
+                _that._homeView.showPlayListsTable("Last 3 Playlists", catalogPlayLists);
 
             },
             function error(data) {
-                showPopup('error', "Error loading play lists!");
+                showPopup('error', "Error loading playlists!");
             });
 
         this._requester.get(requestUrl + "songs",
@@ -60,15 +55,11 @@ class HomeController {
                     return date2 - date1;
                 });
 
-                let currentId = 1;
-
-                for (let i = 0; i < data.length && i < 5; i++) {
-                    data[i].songId = currentId;
-                    currentId++;
+                for (let i = 0; i < data.length && i < 3; i++) {
                     catalogSongs.push(data[i]);
                 }
 
-                _that._homeView.showSongsTable(catalogSongs);
+                _that._homeView.showSongsTable("Last 3 Songs", catalogSongs);
 
             },
 
