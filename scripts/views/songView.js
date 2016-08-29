@@ -2,6 +2,15 @@ class SongView {
     constructor(wrapperSelector, navBarSelector) {
         this._wrapperSelector = wrapperSelector;
         this._navBarSelector = navBarSelector;
+
+        let _that = this;
+
+        $.get("templates/navbarUser.html", function (template) {
+
+            let data = {username:sessionStorage.username};
+            let rendered = Mustache.render(template, data);
+            $(_that._navBarSelector).html(rendered);
+        });
     }
 
     showCreateSongPage() {
@@ -9,14 +18,7 @@ class SongView {
         let _that = this;
         let templateUrl;
 
-
         templateUrl = "templates/create-song.html";
-
-
-        $.get("templates/navbarUser.html", function (template) {
-            let rendered = Mustache.render(template, null);
-            $(_that._navBarSelector).html(rendered);
-        });
 
         $.get(templateUrl, function (template) {
             let rendered = Mustache.render(template, null);
@@ -55,11 +57,6 @@ class SongView {
         let templateUrl;
         templateUrl = "templates/create-playList.html";
 
-        $.get("templates/navbarUser.html", function (template) {
-            let rendered = Mustache.render(template, null);
-            $(_that._navBarSelector).html(rendered);
-        });
-
         $.get(templateUrl, function (template) {
             let rendered = Mustache.render(template, null);
             $(_that._wrapperSelector).html(rendered);
@@ -86,13 +83,30 @@ class SongView {
         });
     }
 
+    showSongsPage(data) {
+        let _that = this;
+
+        $.get("templates/songs.html", function (template) {
+            let rendered = Mustache.render(template, {songs:data});
+
+            $(_that._wrapperSelector).html(rendered);
+        });
+    }
+
+    showPlaylistsPage(data) {
+        let _that = this;
+
+        $.get("templates/playlists.html", function (template) {
+            console.log("--data===", data);
+            let rendered = Mustache.render(template, {playLists:data});
+
+            $(_that._wrapperSelector).html(rendered);
+        });
+    }
+
     showEditSongPage(id, data) {
         let _that = this;
 
-        $.get("templates/navbarUser.html", function (template) {
-            let rendered = Mustache.render(template, null);
-            $(_that._navBarSelector).html(rendered);
-        });
 
         $.get("templates/editSong.html", function (template) {
             let rendered = Mustache.render(template, data);
@@ -126,11 +140,6 @@ class SongView {
     showEditPlayListPage(id, data) {
         let _that = this;
 
-        $.get("templates/navbarUser.html", function (template) {
-            let rendered = Mustache.render(template, null);
-            $(_that._navBarSelector).html(rendered);
-        });
-
         $.get("templates/editPlayList.html", function (template) {
             let rendered = Mustache.render(template, data);
 
@@ -156,13 +165,18 @@ class SongView {
         });
     }
 
-    showDeleteSongPage(id, data) {
+    showViewPlayListPage(data) {
         let _that = this;
 
-        $.get("templates/navbarUser.html", function (template) {
-            let rendered = Mustache.render(template, null);
-            $(_that._navBarSelector).html(rendered);
+        $.get("templates/viewPlayList.html", function (template) {
+            let rendered = Mustache.render(template, data);
+
+            $(_that._wrapperSelector).html(rendered);
         });
+    }
+
+    showDeleteSongPage(id, data) {
+        let _that = this;
 
         $.get("templates/deleteSong.html", function (template) {
             let rendered = Mustache.render(template, data);
@@ -187,11 +201,6 @@ class SongView {
     showDeletePlaylistPage(id, data) {
         let _that = this;
 
-        $.get("templates/navbarUser.html", function (template) {
-            let rendered = Mustache.render(template, null);
-            $(_that._navBarSelector).html(rendered);
-        });
-
         $.get("templates/deletePlaylist.html", function (template) {
             let rendered = Mustache.render(template, data);
 
@@ -212,15 +221,41 @@ class SongView {
         });
     }
 
-    showAddSongPage(catalogSongs) {
+    showAddSongPage() {
+        let _that = this;
 
-            $.get('templates/addSong.html', function (template) {
-                let templateVars = {
+
+        $.get("templates/addSong.html", function (template) {
+            let rendered = Mustache.render(template, {});
+
+            $(_that._wrapperSelector).html(rendered);
+
+        });
+    }
+
+    showAddSongsTable(id, catalogSongs) {
+    	let _that = this;
+
+    	$.get('templates/addSongsList.html', function (template) {
+            let templateVars = {
+                    playlistId:id,
                     songs: catalogSongs
                 };
-                let renderedSongs = Mustache.render(template, templateVars);
-                $('#songs').html(renderedSongs);
-            });
+
+    		let rendered = Mustache.render(template, templateVars);
+    		$('#songs').html(rendered);
+    	});
+    }
+
+    showPlaylistInfo(playlist) {
+    	let _that = this;
+
+    	$.get('templates/showPlaylistInfo.html', function (template) {
+            console.log("playlist", playlist);
+
+    		let rendered = Mustache.render(template, {playlist: playlist});
+    		$('#playlist').html(rendered);
+    	});
     }
 
 }

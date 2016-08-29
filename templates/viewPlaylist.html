@@ -1,0 +1,37 @@
+
+<div class="panel panel-default">
+	<div class="panel-heading">Playlist : {{title}} {{id}}</div>
+</div>
+
+<table class="table table-striped">
+
+  <thead>
+    <tr>
+      <th colspan="5">Songs</th>
+    </tr>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Url</th>
+      <th colspan="2"> </th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#songs}}
+    <tr id="song-{{_id}}">
+      <td class="title">  {{_obj.title}}</td>
+      <td class="description">{{_obj.description}}</td>
+      <td class="file"><a href="#" onclick="window.open('{{_obj.file}}')">{{_obj.file}}</a></td>
+
+      <td><a class="btn btn-primary" 
+      onClick="triggerEvent('deleteSongFromPlaylist', {id: '{{id}}', song_id: '{{_id}}' });"
+
+      >Delete</a></td>
+    </tr>
+    {{/songs}}
+    {{^songs}}
+    <tr>
+      <td colspan="3">No Songs</td>
+    </tbody>
+    {{/songs}}
+  </table>

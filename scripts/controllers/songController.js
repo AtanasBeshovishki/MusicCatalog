@@ -23,21 +23,33 @@ class SongController {
             });
     }
 
-    showCreatePlayListPage() {
-        this._songView.showCreatePlayListPage()
-    }
+    addSong(data) {
 
-    createPlayList(data) {
-
-        let requestUrl = this._baseServiceUrl + "playLists";
-        this.requester.post(requestUrl, data,
+        this.requester.put(this._baseServiceUrl + "songs", data,
             function success(data) {
-                showPopup('success', "You have successfully create a play list.");
+                showPopup('success', "You have successfully added song.");
                 redirectUrl("#/");
             },
             function error(data) {
-                showPopup('error', "An error has occurred while attempting to create a play list.");
+                showPopup('error', "An error has occurred while attempting to add song.");
             });
+    }
+
+    showSongsPage(data) {
+        let _that = this;
+
+        this.requester.get(this._baseServiceUrl + "songs",
+            function success(data) {
+                _that._songView.showSongsPage(data);
+            },
+            function error(data) {
+                showPopup('error', "Error loading songs!");
+            }
+        );
+    }
+
+    showCreatePlayListPage() {
+        this._songView.showCreatePlayListPage()
     }
 
     showEditSongPage(id){
@@ -46,6 +58,8 @@ class SongController {
         let _that = this;
 
         this.requester.get(requestUrl + "/" + id,  function success(data) {
+
+                console.log("song", data);
                 _that._songView.showEditSongPage(id, data);
             },
             function error(data) {
@@ -67,32 +81,6 @@ class SongController {
             });
     }
 
-    showEditPlayListPage(id) {
-    	let requestUrl = this._baseServiceUrl + "playLists";
-
-    	let _that = this;
-
-    	this.requester.get(requestUrl + "/" + id,  function success(data) {
-        		_that._songView.showEditPlayListPage(id, data);
-            },
-            function error(data) {
-               showPopup('error', "Error loading Playlist!");
-            }
-        );
-    }
-
-    editPlayList(data) {
-        let requestUrl = this._baseServiceUrl + "playLists";
-
-        this.requester.put(requestUrl + "/" + data["id"], data,
-            function success(data) {
-                showPopup('success', "You have successfully modified the play list.");
-                redirectUrl("#/");
-            },
-            function error(data) {
-                showPopup('error', "An error has occurred while attempting to modify the play list.");
-            });
-    }
 
     showDeleteSongPage(id){
         let requestUrl = this._baseServiceUrl + "songs";
@@ -119,6 +107,78 @@ class SongController {
             function error(data) {
                 showPopup('error', "An error has occurred while attempting to deleted song.");
             });
+    }
+
+
+    // Playlists /////////////////////////////////////////////////////////////////
+
+    showPlaylistsPage(data) {
+        let _that = this;
+
+        this.requester.get(this._baseServiceUrl + "playLists",
+            function success(data) {
+                _that._songView.showPlaylistsPage(data);
+            },
+            function error(data) {
+                showPopup('error', "Error loading playlists!");
+            }
+        );
+    }
+
+    createPlayList(data) {
+
+        this.requester.post(this._baseServiceUrl + "playLists", data,
+            function success(data) {
+                showPopup('success', "You have successfully create a playlist.");
+                redirectUrl("#/");
+            },
+            function error(data) {
+                showPopup('error', "An error has occurred while attempting to create a playlist.");
+            });
+    }
+
+    showEditPlayListPage(id) {
+    	let requestUrl = this._baseServiceUrl + "playLists";
+
+    	let _that = this;
+
+    	this.requester.get(requestUrl + "/" + id,  function success(data) {
+                 console.log("pl", data);
+        		_that._songView.showEditPlayListPage(id, data);
+            },
+            function error(data) {
+               showPopup('error', "Error loading Playlist!");
+            }
+        );
+    }
+
+    editPlayList(data) {
+        let requestUrl = this._baseServiceUrl + "playLists";
+
+        this.requester.put(requestUrl + "/" + data["id"], data,
+            function success(data) {
+                showPopup('success', "You have successfully modified the playlist.");
+                redirectUrl("#/");
+            },
+            function error(data) {
+                showPopup('error', "An error has occurred while attempting to modify the playlist.");
+            });
+    }
+
+    showViewPlaylist(id) {
+        let requestUrl = this._baseServiceUrl + "playLists";
+
+        let _that = this;
+
+        this.requester.get(requestUrl + "/" + id + "?resolve=songs",  function success(data) {
+                 console.log("pl", data);
+                 data.id = id;
+                _that._songView.showViewPlayListPage(data);
+            },
+            function error(data) {
+               showPopup('error', "Error loading Playlist!");
+            }
+        );
     }
 
     showDeletePlaylistPage(id){
@@ -148,49 +208,124 @@ class SongController {
             });
     }
 
-    showAddSongPage(){
+    showAddSongPage(id) {
         let _that = this;
 
         let catalogSongs = [];
 
-        let requestUrl = this._baseServiceUrl;
+        _that._songView.showAddSongPage();
 
-        this._requester.get(requestUrl + "songs",
+    	this.requester.get(this._baseServiceUrl + "playLists/" + id,  function success(data) {
+    			console.log(data);
+
+        		_that._songView.showPlaylistInfo(data);
+            },
+            function error(data) {
+               showPopup('error', "Error loading Playlist!");
+            }
+        );
+
+        this.requester.get(this._baseServiceUrl + "songs",
             function success(data) {
-
                 data.sort(function (elem1, elem2) {
                     let date1 = new Date(elem1._kmd.ect);
                     let date2 = new Date(elem2._kmd.ect);
                     return date2 - date1;
                 });
 
-                let currentId = 1;
-
-                for (let i = 0; i < data.length && i < 5; i++) {
-                    data[i].songId = currentId;
-                    currentId++;
+                for (let i = 0; i < data.length && i < 10; i++) {
+                    data[i].songId = data._id;
                     catalogSongs.push(data[i]);
                 }
 
-                //TODO : Create view function
-                _that._songView.showAddSongPage(catalogSongs);
+                _that._songView.showAddSongsTable(id, catalogSongs);
 
             },
             function error(data) {
-                showPopup('error', "Error loading play lists!");
+                showPopup('error', "Error loading playlists!");
             });
     }
 
-    addSong(data) {
-        let requestUrl = this._baseServiceUrl + "songs";
+    addSongToPlaylist(data) {
+        let requestUrl = this._baseServiceUrl + "playLists";
+        let _that = this;
 
-        this.requester.put(requestUrl, data,
-            function success(data) {
-                showPopup('success', "You have successfully added song.");
-                redirectUrl("#/");
+        let playlistId = data["id"];
+
+        this.requester.get(requestUrl + "/" + playlistId + "?resolve=songs",  function success(playlist) {
+
+
+                // Tuk za relacii - http://devcenter.kinvey.com/rest/guides/datastore#RelationalData
+
+                let songs = new Array();
+                if(typeof(playlist.songs) !== "undefined") {
+                    songs = playlist.songs;
+                }
+
+                songs.push({ 
+                    "_type": "KinveyRef",
+                    "_id": data["song_id"],
+                    "_collection": "songs"
+                });
+
+                playlist.songs = songs;
+
+                _that.requester.put(requestUrl + "/" + playlistId, playlist,
+                    function success(data) {
+                        showPopup('success', "You have successfully added a song to the playlist.");
+                        // redirectUrl("#/");
+                    },
+                    function error(data) {
+                        showPopup('error', "An error has occurred while adding a song to the playlist.");
+                    }
+                );
             },
             function error(data) {
-                showPopup('error', "An error has occurred while attempting to add song.");
-            });
+                showPopup('error', "Error loading playList!");
+            }
+        );
+
     }
+
+
+    deleteSongFromPlaylist(data) {
+        let requestUrl = this._baseServiceUrl + "playLists";
+        let _that = this;
+
+        let playlistId = data["id"]; 
+        let songId = data["song_id"]; 
+
+        this.requester.get(requestUrl + "/" + playlistId + "?resolve=songs",  function success(playlist) {
+
+
+
+                let songs = new Array(); 
+                
+                for (let i = playlist.songs.length - 1; i >= 0; i--) {
+                    // Mahane na pesenta
+                    if(songId !== playlist.songs[i]._id) {                       
+                        songs.push( playlist.songs[i]);
+                    }
+                }
+
+                playlist.songs = songs;
+                
+
+                _that.requester.put(requestUrl + "/" + playlistId, playlist,
+                    function success(data) {
+                        showPopup('success', "You have successfully deleted a song to the playlist.");
+                         redirectUrl("#/viewPlaylist/" + playlistId);
+                    },
+                    function error(data) {
+                        showPopup('error', "An error has occurred while deleted a song to the playlist.");
+                    }
+                );
+            },
+            function error(data) {
+                showPopup('error', "Error loading playList!");
+            }
+        );
+
+    }
+
 }

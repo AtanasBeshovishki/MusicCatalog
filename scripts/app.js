@@ -56,6 +56,22 @@
         userController.logout();
     });
 
+    onRoute("#/songs", function () {
+        if (!authService.isLoggedIn()) {
+            homeController.showGuestPage();
+        } else {
+            songController.showSongsPage();
+        }
+    });
+
+    onRoute("#/playlists", function () { 
+        if (!authService.isLoggedIn()) {
+            homeController.showGuestPage();
+        } else {
+            songController.showPlaylistsPage();
+        }
+    });
+
     onRoute("#/create-song", function () {
         if (!authService.isLoggedIn()) {
             homeController.showGuestPage();
@@ -76,20 +92,25 @@
         songController.showEditSongPage(this.params['id']);
     });
 
-    onRoute("#/editPlayList/:id", function (da) {
+    onRoute("#/editPlayList/:id", function () {
         songController.showEditPlayListPage(this.params['id']);
+    });
+
+
+    onRoute("#/viewPlaylist/:id", function () {
+        songController.showViewPlaylist(this.params['id']);
     });
 
     onRoute("#/deleteSong/:id", function () {
         songController.showDeleteSongPage(this.params['id']);
     });
 
-    onRoute("#/deletePlaylist/:id", function (da) {
+    onRoute("#/deletePlaylist/:id", function () {
         songController.showDeletePlaylistPage(this.params['id']);
     });
 
-    onRoute("#/addSong:songs", function (da) {
-        songController.showAddSongPage(this.params['songs']);
+    onRoute("#/addSong/:id", function () {
+        songController.showAddSongPage(this.params['id']);
     });
 
     bindEventHandler('login', function (ev, data) {
@@ -126,7 +147,19 @@
     });
 
     bindEventHandler('addSong', function (ev, data) {
+
         songController.addSong(data);
+    });
+
+    bindEventHandler('viewPlaylist', function (ev, data) {
+        songController.viewPlaylist(data);
+    });
+
+    bindEventHandler('addSongToPlaylist', function (ev, data) {
+        songController.addSongToPlaylist(data);
+    });
+    bindEventHandler('deleteSongFromPlaylist', function (ev, data) {
+        songController.deleteSongFromPlaylist(data);
     });
 
     run('#/');

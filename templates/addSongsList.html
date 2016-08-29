@@ -1,8 +1,9 @@
-
-<h3>{{title}}</h3>
-
 <table class="table table-striped">
-<thead>
+
+    <thead>
+        <tr>
+            <th colspan="5">Add song</th>
+        </tr>
         <tr>
             <th>Title</th>
             <th>Description</th>
@@ -17,9 +18,8 @@
             <td class="description">{{description}}</td>
             <td class="file"><a href="#" onclick="window.open('{{file}}')">{{file}}</a></td>
 
-            <td><a class="btn btn btn-danger" onclick="window.open('{{file}}')">Play</a></td>
-            <td><a class="btn btn-primary" href="#/editSong/{{_id}}">Edit</a></td>
-            <td><a class="btn btn-primary" href="#/deleteSong/{{_id}}">Delete</a></td>
+            <td><button type="button" class="btn btn-primary" id="add-song-button" 
+            onClick="triggerEvent('addSongToPlaylist', {id: '{{playlistId}}', song_id: '{{_id}}' });">Add to Playlist</button></td>
         </tr>
         {{/songs}}
     </tbody>
