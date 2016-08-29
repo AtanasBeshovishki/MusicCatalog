@@ -28,14 +28,21 @@ class HomeView {
 
         });
 
-        $.get('templates/navbarUser.html', function (template) {
-            let renderedContent = Mustache.render(template, null);
-            $(_that._navBarSelector).html(renderedContent);
+        // $.get('templates/navbarUser.html', function (template) {
+        //     let renderedContent = Mustache.render(template, null);
+        //     $(_that._navBarSelector).html(renderedContent);
+        //
+        // });
+        $.get("templates/navbarUser.html", function (template) {
 
+            let data = {username:sessionStorage.username};
+            let rendered = Mustache.render(template, data);
+            $(_that._navBarSelector).html(rendered);
         });
     }
 
     showPlayListsTable(title = "Playlist", catalogPlayLists) {
+
 
         $.get('templates/playLists.html', function (template) {
             let templateVarsP = {

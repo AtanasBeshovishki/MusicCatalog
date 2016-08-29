@@ -9,8 +9,6 @@ class HomeController {
     showGuestPage(data) {
         let _that = this;
 
-        let catalogSongs = [];
-
         _that._homeView.showGuestPage(null, null);
     }
 
@@ -38,7 +36,6 @@ class HomeController {
                     catalogPlayLists.push(data[i]);
                 }
 
-                //TODO : Create view function
                 _that._homeView.showPlayListsTable("Last 3 Playlists", catalogPlayLists);
 
             },

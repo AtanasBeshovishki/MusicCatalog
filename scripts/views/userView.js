@@ -4,13 +4,13 @@ class UserView {
         this._navBarSelector = navBarSelector;
     }
 
-    showLoginPage(isLoggedIn) {
+    showLoginPage() {
         let _that = this;
 
-        $.get("templates/navbarUser.html", function (template) {
-            let rendered = Mustache.render(template, null);
-            $(_that._navBarSelector).html(rendered);
-        });
+        // $.get("templates/navbarUser.html", function (template) {
+        //     let rendered = Mustache.render(template, null);
+        //     $(_that._navBarSelector).html(rendered);
+        // });
 
         $.get('templates/login.html', function (template) {
             let rendered = Mustache.render(template, null);
@@ -29,7 +29,7 @@ class UserView {
         });
     }
 
-    showRegisterPage(isLoggedIn) {
+    showRegisterPage() {
 
         let _that = this;
         $.get('templates/register.html', function (template) {

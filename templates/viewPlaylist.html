@@ -21,6 +21,7 @@
     <tr id="song-{{_id}}">
       <td class="title">  {{_obj.title}}</td>
       <td class="description">{{_obj.description}}</td>
+      <td><a class="btn btn btn-danger" onclick="window.open('{{_obj.file}}')">Play</a></td>
       <td class="file"><a href="#" onclick="window.open('{{_obj.file}}')">{{_obj.file}}</a></td>
 
       <td><a class="btn btn-primary" 

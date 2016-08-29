@@ -4,6 +4,11 @@ class SongController {
         this.requester = requester;
         this._appKey = appKey;
         this._baseServiceUrl = baseUrl + "/appdata/" + appKey + "/";
+
+        $.get("templates/navbarUser.html", function (template) {
+            let rendered = Mustache.render(template, null);
+            $(_that._navBarSelector).html(rendered);
+        });
     }
 
     showCreateSongPage() {
