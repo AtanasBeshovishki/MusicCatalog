@@ -39,3 +39,8 @@ tr:hover {
 #delete-playlist-button:hover{
     background: rgba(244, 29, 30, 0.7);
 }
+
+.navbarUser{
+    float: right;
+    color: #bce8f1;
+}
