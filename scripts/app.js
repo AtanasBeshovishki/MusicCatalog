@@ -43,6 +43,10 @@
         }
     });
 
+    onRoute("#/userInfo", function () {
+        userController.showUserInfo();
+    });
+
 
     onRoute("#/login", function () {
         userController.showLoginPage(authService.isLoggedIn());
@@ -112,6 +116,8 @@
     onRoute("#/addSong/:id", function () {
         songController.showAddSongPage(this.params['id']);
     });
+
+
 
     bindEventHandler('login', function (ev, data) {
         userController.login(data);

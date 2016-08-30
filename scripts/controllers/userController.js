@@ -15,6 +15,13 @@ class UserController {
 
     }
 
+    showUserInfo(){
+        let _that = this;
+
+        _that._userView.showUserInfo(null, null);
+
+    }
+
     register(requestData) {
         if (requestData.username.length < 3) {
             showPopup('error', "Username must consist of at least 3 symbols.");
@@ -38,15 +45,12 @@ class UserController {
 
         delete requestData['confirmPassword'];
 
-        console.log(this._baseServiceUrl, requestData);
-
         this._requester.post(this._baseServiceUrl, requestData,
             function success() {
                 showPopup('success', "You have successfully registered.");
                 redirectUrl("#/login");
             },
-            function error(response) {
-                console.log(response);
+            function error() {
                 showPopup('error', "An error has occurred while attempting to register.");
             });
     }

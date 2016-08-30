@@ -39,7 +39,7 @@ class HomeController {
                 _that._homeView.showPlayListsTable("Last 3 Playlists", catalogPlayLists);
 
             },
-            function error(data) {
+            function error() {
                 showPopup('error', "Error loading playlists!");
             });
 

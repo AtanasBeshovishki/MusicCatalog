@@ -1,129 +1,26 @@
-class SongController {
-    constructor(songView, requester, baseUrl, appKey) {
-        this._songView = songView;
+class PlaylistController{
+    constructor(playlistView, requester, baseUrl, appKey){
+        this._playlistView = playlistView;
         this.requester = requester;
         this._appKey = appKey;
         this._baseServiceUrl = baseUrl + "/appdata/" + appKey + "/";
     }
-
-    showCreateSongPage() {
-        this._songView.showCreateSongPage();
-    }
-
-    createSong(data) {
-        let requestUrl = this._baseServiceUrl + "songs";
-
-        this.requester.post(requestUrl, data,
-            function success() {
-                showPopup('success', "You have successfully created a new song.");
-                redirectUrl("#/");
-            },
-            function error() {
-                showPopup('error', "An error has occurred while attempting to create a new song.");
-            });
-    }
-
-    addSong(data) {
-
-        this.requester.put(this._baseServiceUrl + "songs", data,
-            function success() {
-                showPopup('success', "You have successfully added song.");
-                redirectUrl("#/");
-            },
-            function error() {
-                showPopup('error', "An error has occurred while attempting to add song.");
-            });
-    }
-
-    showSongsPage() {
-        let _that = this;
-
-        this.requester.get(this._baseServiceUrl + "songs",
-            function success(data) {
-                _that._songView.showSongsPage(data);
-            },
-            function error() {
-                showPopup('error', "Error loading songs!");
-            }
-        );
-    }
-
     showCreatePlayListPage() {
-        this._songView.showCreatePlayListPage()
+        this._playlistView.showCreatePlayListPage()
     }
-
-    showEditSongPage(id){
-        let requestUrl = this._baseServiceUrl + "songs";
-
-        let _that = this;
-
-        this.requester.get(requestUrl + "/" + id,  function success(data) {
-
-                _that._songView.showEditSongPage(id, data);
-            },
-            function error() {
-                showPopup('error', "Error loading Songs!");
-            }
-        );
-    }
-
-    editSong(data){
-        let requestUrl = this._baseServiceUrl + "songs";
-
-        this.requester.put(requestUrl + "/" + data["id"], data,
-            function success() {
-                showPopup('success', "You have successfully modified the song.");
-                redirectUrl("#/");
-            },
-            function error() {
-                showPopup('error', "An error has occurred while attempting to modify the song.");
-            });
-    }
-
-
-    showDeleteSongPage(id){
-        let requestUrl = this._baseServiceUrl + "songs";
-
-        let _that = this;
-
-        this.requester.get(requestUrl + "/" + id,  function success(data) {
-                _that._songView.showDeleteSongPage(id, data);
-            },
-            function error() {
-                showPopup('error', "Error loading song!");
-            }
-        );
-    }
-
-    deleteSong(data){
-        let requestUrl = this._baseServiceUrl + "songs";
-
-        this.requester.delete(requestUrl + "/" + data["id"], data,
-            function success() {
-                showPopup('success', "You have successfully deleted song.");
-                redirectUrl("#/");
-            },
-            function error(data) {
-                showPopup('error', "An error has occurred while attempting to deleted song.");
-            });
-    }
-
-
-    // Playlists /////////////////////////////////////////////////////////////////
 
     showPlaylistsPage() {
         let _that = this;
 
         this.requester.get(this._baseServiceUrl + "playLists",
             function success(data) {
-                _that._songView.showPlaylistsPage(data);
+                _that._playlistView.showPlaylistsPage(data);
             },
             function error() {
                 showPopup('error', "Error loading playlists!");
             }
         );
     }
-
     createPlayList(data) {
 
         this.requester.post(this._baseServiceUrl + "playLists", data,
@@ -137,15 +34,16 @@ class SongController {
     }
 
     showEditPlayListPage(id) {
-    	let requestUrl = this._baseServiceUrl + "playLists";
+        let requestUrl = this._baseServiceUrl + "playLists";
 
-    	let _that = this;
+        let _that = this;
 
-    	this.requester.get(requestUrl + "/" + id,  function success(data) {
-        		_that._songView.showEditPlayListPage(id, data);
+        this.requester.get(requestUrl + "/" + id,  function success(data) {
+                // console.log("pl", data);
+                _that._playlistView.showEditPlayListPage(id, data);
             },
             function error() {
-               showPopup('error', "Error loading Playlist!");
+                showPopup('error', "Error loading Playlist!");
             }
         );
     }
@@ -169,11 +67,12 @@ class SongController {
         let _that = this;
 
         this.requester.get(requestUrl + "/" + id + "?resolve=songs",  function success(data) {
-                 data.id = id;
-                _that._songView.showViewPlayListPage(data);
+                // console.log("pl", data);
+                data.id = id;
+                _that._playlistView.showViewPlayListPage(data);
             },
             function error() {
-               showPopup('error', "Error loading Playlist!");
+                showPopup('error', "Error loading Playlist!");
             }
         );
     }
@@ -184,7 +83,7 @@ class SongController {
         let _that = this;
 
         this.requester.get(requestUrl + "/" + id,  function success(data) {
-                _that._songView.showDeletePlaylistPage(id, data);
+                _that._playlistView.showDeletePlaylistPage(id, data);
             },
             function error() {
                 showPopup('error', "Error loading playList!");
@@ -200,7 +99,7 @@ class SongController {
                 showPopup('success', "You have successfully deleted playlist.");
                 redirectUrl("#/");
             },
-            function error() {
+            function error(data) {
                 showPopup('error', "An error has occurred while attempting to deleted playlist.");
             });
     }
@@ -210,14 +109,15 @@ class SongController {
 
         let catalogSongs = [];
 
-        _that._songView.showAddSongPage();
+        _that._playlistView.showAddSongPage();
 
-    	this.requester.get(this._baseServiceUrl + "playLists/" + id,  function success(data) {
+        this.requester.get(this._baseServiceUrl + "playLists/" + id,  function success(data) {
+                console.log(data);
 
-        		_that._songView.showPlaylistInfo(data);
+                _that._playlistView.showPlaylistInfo(data);
             },
             function error() {
-               showPopup('error', "Error loading Playlist!");
+                showPopup('error', "Error loading Playlist!");
             }
         );
 
@@ -234,7 +134,7 @@ class SongController {
                     catalogSongs.push(data[i]);
                 }
 
-                _that._songView.showAddSongsTable(id, catalogSongs);
+                _that._playlistView.showAddSongsTable(id, catalogSongs);
 
             },
             function error() {
@@ -271,12 +171,12 @@ class SongController {
                         showPopup('success', "You have successfully added a song to the playlist.");
                         // redirectUrl("#/");
                     },
-                    function error(data) {
+                    function error() {
                         showPopup('error', "An error has occurred while adding a song to the playlist.");
                     }
                 );
             },
-            function error(data) {
+            function error() {
                 showPopup('error', "Error loading playList!");
             }
         );
@@ -308,20 +208,19 @@ class SongController {
 
 
                 _that.requester.put(requestUrl + "/" + playlistId, playlist,
-                    function success(data) {
+                    function success() {
                         showPopup('success', "You have successfully deleted a song to the playlist.");
-                         redirectUrl("#/viewPlaylist/" + playlistId);
+                        redirectUrl("#/viewPlaylist/" + playlistId);
                     },
-                    function error(data) {
+                    function error() {
                         showPopup('error', "An error has occurred while deleted a song to the playlist.");
                     }
                 );
             },
-            function error(data) {
+            function error() {
                 showPopup('error', "Error loading playList!");
             }
         );
 
     }
-
 }

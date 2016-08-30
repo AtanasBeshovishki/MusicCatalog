@@ -1,6 +1,6 @@
 
 <div class="panel panel-default">
-	<div class="panel-heading">Playlist : {{title}} {{id}}</div>
+	<div class="panel-heading">Playlist : {{title}}</div>
 </div>
 
 <table class="table table-striped">
@@ -21,8 +21,10 @@
     <tr id="song-{{_id}}">
       <td class="title">  {{_obj.title}}</td>
       <td class="description">{{_obj.description}}</td>
+
+      <td class="file"><a href="javascript:void(0);" onclick="window.open('{{_obj.file}}')">{{_obj.file}}</a></td>
+
       <td><a class="btn btn btn-danger" onclick="window.open('{{_obj.file}}')">Play</a></td>
-      <td class="file"><a href="#" onclick="window.open('{{_obj.file}}')">{{_obj.file}}</a></td>
 
       <td><a class="btn btn-primary" 
       onClick="triggerEvent('deleteSongFromPlaylist', {id: '{{id}}', song_id: '{{_id}}' });"

@@ -4,7 +4,7 @@ class HomeView {
         this._navBarSelector = navBarSelector;
     }
 
-    showGuestPage(data) {
+    showGuestPage() {
         let _that = this;
 
         $.get('templates/welcome-guest.html', function (template) {
@@ -19,7 +19,7 @@ class HomeView {
         });
     }
 
-    showUserPage(data) {
+    showUserPage() {
         let _that = this;
 
         $.get('templates/welcome-user.html', function (template) {
@@ -27,12 +27,6 @@ class HomeView {
             $(_that._wrapperSelector).html(rendered);
 
         });
-
-        // $.get('templates/navbarUser.html', function (template) {
-        //     let renderedContent = Mustache.render(template, null);
-        //     $(_that._navBarSelector).html(renderedContent);
-        //
-        // });
         $.get("templates/navbarUser.html", function (template) {
 
             let data = {username:sessionStorage.username};

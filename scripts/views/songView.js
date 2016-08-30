@@ -97,7 +97,6 @@ class SongView {
         let _that = this;
 
         $.get("templates/playlists.html", function (template) {
-            console.log("--data===", data);
             let rendered = Mustache.render(template, {playLists:data});
 
             $(_that._wrapperSelector).html(rendered);
@@ -234,7 +233,6 @@ class SongView {
     }
 
     showAddSongsTable(id, catalogSongs) {
-    	let _that = this;
 
     	$.get('templates/addSongsList.html', function (template) {
             let templateVars = {
@@ -248,11 +246,8 @@ class SongView {
     }
 
     showPlaylistInfo(playlist) {
-    	let _that = this;
 
     	$.get('templates/showPlaylistInfo.html', function (template) {
-            console.log("playlist", playlist);
-
     		let rendered = Mustache.render(template, {playlist: playlist});
     		$('#playlist').html(rendered);
     	});

@@ -7,14 +7,16 @@ class UserView {
     showLoginPage() {
         let _that = this;
 
-        // $.get("templates/navbarUser.html", function (template) {
-        //     let rendered = Mustache.render(template, null);
-        //     $(_that._navBarSelector).html(rendered);
-        // });
+        $.get("templates/navbarGuest.html", function (template) {
+            let rendered = Mustache.render(template, null);
+            $(_that._navBarSelector).html(rendered);
+
+        });
 
         $.get('templates/login.html', function (template) {
             let rendered = Mustache.render(template, null);
             $(_that._wrapperSelector).html(rendered);
+            document.getElementById("username").focus();
 
             $('#login-request-button').on('click', function (ev) {
                 let username = $('#username').val();
@@ -26,15 +28,23 @@ class UserView {
                 };
                 triggerEvent('login', data);
             })
+
         });
     }
 
     showRegisterPage() {
 
         let _that = this;
+
+        $.get("templates/navbarGuest.html", function (template) {
+            let rendered = Mustache.render(template, null);
+            $(_that._navBarSelector).html(rendered);
+        });
+
         $.get('templates/register.html', function (template) {
             let rendered = Mustache.render(template, null);
             $(_that._wrapperSelector).html(rendered);
+            document.getElementById("username").focus();
 
             $('#register-request-button').on('click', function () {
 
@@ -52,6 +62,23 @@ class UserView {
 
                 triggerEvent('register', data);
             })
+        });
+    }
+
+    showUserInfo(){
+        let _that = this;
+        $.get("templates/navbarUser.html", function (template) {
+
+            let data = {username:sessionStorage.username};
+            let rendered = Mustache.render(template, data);
+            $(_that._navBarSelector).html(rendered);
+        });
+
+        $.get('templates/userInfo.html', function (template) {
+            let data = {username:sessionStorage.username, fullName:sessionStorage.fullName};
+            let rendered = Mustache.render(template, data);
+            $(_that._wrapperSelector).html(rendered);
+
         });
     }
 }

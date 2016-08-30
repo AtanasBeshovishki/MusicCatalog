@@ -44,3 +44,16 @@ tr:hover {
     float: right;
     color: #bce8f1;
 }
+
+.titleDeletePl{
+    color: deeppink;
+}
+
+.info{
+    text-align: center;
+    color: blue;
+}
+
+#usernameInfo, #fullNameInfo{
+    color: deeppink;
+}
