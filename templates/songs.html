@@ -18,7 +18,7 @@
         	<a class="btn btn btn-danger" onclick="window.open('{{file}}')">Play</a>
        {{#personal}}
 			<a class="btn btn-primary" href="#/editSong/{{_id}}">Edit</a>
-	        <a class="btn btn-primary" href="#/deleteSong/{{_id}}" onclick="return confirm('Are you sure want to delete {{title}}');">Delete</a>
+	        <a class="btn btn-primary" href="#/deleteSong/{{_id}}" onclick='return confirm("Are you sure want to delete {{title}}");'>Delete</a>
        {{/personal}}
        </td>
     </tr>
