@@ -67,7 +67,7 @@ tr:hover {
     color: blue;
 }
 
-#panelHeading{
+#panelHeading, #panelHeadingShow{
     color: blue;
 }
 .navbarGuest {
