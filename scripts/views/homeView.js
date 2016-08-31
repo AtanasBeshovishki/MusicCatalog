@@ -28,8 +28,7 @@ class HomeView {
 
         });
         $.get("templates/navbarUser.html", function (template) {
-
-            let data = {username:sessionStorage.username};
+            let data = {username: sessionStorage.username};
             let rendered = Mustache.render(template, data);
             $(_that._navBarSelector).html(rendered);
         });
@@ -37,10 +36,9 @@ class HomeView {
 
     showPlayListsTable(title = "Playlist", catalogPlayLists) {
 
-
         $.get('templates/playLists.html', function (template) {
             let templateVarsP = {
-                title : title,
+                title: title,
                 playLists: catalogPlayLists
             };
             let renderedPlayLists = Mustache.render(template, templateVarsP);
@@ -52,7 +50,7 @@ class HomeView {
 
         $.get('templates/songs.html', function (template) {
             let templateVars = {
-                title : title,
+                title: title,
                 songs: catalogSongs
             };
             let renderedSongs = Mustache.render(template, templateVars);

@@ -31,6 +31,9 @@
     let songView = new SongView(selector, navBarSelector);
     let songController = new SongController(songView, requester, baseUrl, appKey);
 
+    let playlistView = new PlaylistView(selector, navBarSelector);
+    let playlistController = new PlaylistController(playlistView, requester, baseUrl, appKey);
+
     initEventServices();
 
     onRoute("#/", function () {
@@ -72,7 +75,7 @@
         if (!authService.isLoggedIn()) {
             homeController.showGuestPage();
         } else {
-            songController.showPlaylistsPage();
+            playlistController.showPlaylistsPage();
         }
     });
 
@@ -88,7 +91,7 @@
         if (!authService.isLoggedIn()) {
             homeController.showGuestPage();
         } else {
-            songController.showCreatePlayListPage(authService.isLoggedIn());
+            playlistController.showCreatePlayListPage(authService.isLoggedIn());
         }
     });
 
@@ -97,12 +100,12 @@
     });
 
     onRoute("#/editPlayList/:id", function () {
-        songController.showEditPlayListPage(this.params['id']);
+        playlistController.showEditPlayListPage(this.params['id']);
     });
 
 
     onRoute("#/viewPlaylist/:id", function () {
-        songController.showViewPlaylist(this.params['id']);
+        playlistController.showViewPlaylist(this.params['id']);
     });
 
     onRoute("#/deleteSong/:id", function () {
@@ -110,11 +113,11 @@
     });
 
     onRoute("#/deletePlaylist/:id", function () {
-        songController.showDeletePlaylistPage(this.params['id']);
+        playlistController.showDeletePlaylistPage(this.params['id']);
     });
 
     onRoute("#/addSong/:id", function () {
-        songController.showAddSongPage(this.params['id']);
+        playlistController.showAddSongPage(this.params['id']);
     });
 
 
@@ -133,7 +136,7 @@
     });
 
     bindEventHandler('createPlayList', function (ev, data) {
-        songController.createPlayList(data);
+        playlistController.createPlayList(data);
     });
 
     bindEventHandler('editSong', function (ev, data) {
@@ -141,7 +144,7 @@
     });
 
     bindEventHandler('editPlayList', function (ev, data) {
-        songController.editPlayList(data);
+        playlistController.editPlayList(data);
     });
 
     bindEventHandler('deleteSong', function (ev, data) {
@@ -149,23 +152,23 @@
     });
 
     bindEventHandler('deletePlaylist', function (ev, data) {
-        songController.deletePlaylist(data);
+        playlistController.deletePlaylist(data);
     });
 
     bindEventHandler('addSong', function (ev, data) {
 
-        songController.addSong(data);
+        playlistController.addSong(data);
     });
 
     bindEventHandler('viewPlaylist', function (ev, data) {
-        songController.viewPlaylist(data);
+        playlistController.viewPlaylist(data);
     });
 
     bindEventHandler('addSongToPlaylist', function (ev, data) {
-        songController.addSongToPlaylist(data);
+        playlistController.addSongToPlaylist(data);
     });
     bindEventHandler('deleteSongFromPlaylist', function (ev, data) {
-        songController.deleteSongFromPlaylist(data);
+        playlistController.deleteSongFromPlaylist(data);
     });
 
     run('#/');

@@ -12,6 +12,7 @@ class PlaylistView {
             $(_that._navBarSelector).html(rendered);
         });
     }
+
     showCreatePlayListPage() {
         let _that = this;
         let templateUrl;
@@ -21,12 +22,10 @@ class PlaylistView {
             let rendered = Mustache.render(template, null);
             $(_that._wrapperSelector).html(rendered);
 
-
             $('#create-playList-button').on('click', function () {
 
                 let title = $('#title').val();
                 let date = moment().format("MMMM Do YYYY");
-
 
                 let data = {
                     title: title,
@@ -42,6 +41,7 @@ class PlaylistView {
 
         });
     }
+
     showPlaylistsPage(data) {
         let _that = this;
 
@@ -50,6 +50,7 @@ class PlaylistView {
             $(_that._wrapperSelector).html(rendered);
         });
     }
+
     showEditPlayListPage(id, data) {
         let _that = this;
 
@@ -72,11 +73,12 @@ class PlaylistView {
                 triggerEvent('editPlayList', item);
             });
 
-            $('#cancel-button').on('click', function () {
-                redirectUrl('#/')
+            $('#cancel-button-editPlaylist').on('click', function () {
+                redirectUrl('#/playlists');
             });
         });
     }
+
     showViewPlayListPage(data) {
         let _that = this;
 
@@ -86,6 +88,31 @@ class PlaylistView {
             $(_that._wrapperSelector).html(rendered);
         });
     }
+
+    showAddSongPage() {
+        let _that = this;
+
+        $.get("templates/addSong.html", function (template) {
+            let rendered = Mustache.render(template, {});
+
+            $(_that._wrapperSelector).html(rendered);
+
+        });
+    }
+
+    showAddSongsTable(id, catalogSongs) {
+
+        $.get('templates/addSongsList.html', function (template) {
+            let templateVars = {
+                playlistId: id,
+                songs: catalogSongs
+            };
+
+            let rendered = Mustache.render(template, templateVars);
+            $('#songs').html(rendered);
+        });
+    }
+
     showDeletePlaylistPage(id, data) {
         let _that = this;
 
@@ -108,10 +135,10 @@ class PlaylistView {
             });
         });
     }
+
     showPlaylistInfo(playlist) {
 
         $.get('templates/showPlaylistInfo.html', function (template) {
-            console.log("playlist", playlist);
 
             let rendered = Mustache.render(template, {playlist: playlist});
             $('#playlist').html(rendered);

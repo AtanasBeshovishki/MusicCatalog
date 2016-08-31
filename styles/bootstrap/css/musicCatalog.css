@@ -57,3 +57,12 @@ tr:hover {
 #usernameInfo, #fullNameInfo{
     color: deeppink;
 }
+
+.songsTable{
+    text-align: center;
+    color: blue;
+}
+
+#panelHeading{
+    color: blue;
+}

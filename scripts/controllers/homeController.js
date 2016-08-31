@@ -6,7 +6,7 @@ class HomeController {
         this._baseServiceUrl = baseServiceUrl;
     }
 
-    showGuestPage(data) {
+    showGuestPage() {
         let _that = this;
 
         _that._homeView.showGuestPage(null, null);
@@ -60,7 +60,7 @@ class HomeController {
 
             },
 
-            function error(data) {
+            function error() {
                 showPopup('error', "Error loading songs!");
             });
     }

@@ -15,10 +15,11 @@ class UserController {
 
     }
 
-    showUserInfo(){
+    showUserInfo() {
         let _that = this;
 
-        _that._userView.showUserInfo(null, null);
+
+        _that._userView.showUserInfo();
 
     }
 
@@ -65,12 +66,14 @@ class UserController {
                 sessionStorage['_authToken'] = data._kmd.authtoken;
                 sessionStorage['username'] = data.username;
                 sessionStorage['fullName'] = data.fullName;
+                sessionStorage['dateRegister'] = data.dateRegister;
+                sessionStorage['_id'] = data._id;
 
                 redirectUrl("#/");
 
             },
 
-            function error(data) {
+            function error() {
                 showPopup('error', "An error has occurred while attempting to login.");
             });
     }

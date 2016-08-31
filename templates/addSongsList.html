@@ -1,26 +1,30 @@
 <table class="table table-striped">
 
     <thead>
-        <tr>
-            <th colspan="5">Add song</th>
-        </tr>
-        <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Url</th>
-            <th colspan="2"> </th>
-        </tr>
+    <tr>
+        <th colspan="5">Add song</th>
+    </tr>
+    <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Url</th>
+        <th colspan="2"></th>
+    </tr>
     </thead>
     <tbody>
-        {{#songs}}
-        <tr id="song-{{_id}}">
-            <td class="title">{{title}}</td>
-            <td class="description">{{description}}</td>
-            <td class="file"><a href="#" onclick="window.open('{{file}}')">{{file}}</a></td>
+    {{#songs}}
+    <tr id="song-{{_id}}">
+        <td class="title">{{title}}</td>
+        <td class="description">{{description}}</td>
+        <td class="file"><a href="#" onclick="window.open('{{file}}')">{{file}}</a></td>
 
-            <td><button type="button" class="btn btn-primary" id="add-song-button" 
-            onClick="triggerEvent('addSongToPlaylist', {id: '{{playlistId}}', song_id: '{{_id}}' });">Add to Playlist</button></td>
-        </tr>
-        {{/songs}}
+        <td>
+            <button type="button" class="btn btn-primary" id="add-song-button"
+                    onClick="triggerEvent('addSongToPlaylist', {id: '{{playlistId}}', song_id: '{{_id}}' });">Add to
+                Playlist
+            </button>
+        </td>
+    </tr>
+    {{/songs}}
     </tbody>
 </table>

@@ -52,12 +52,14 @@ class UserView {
                 let password = $('#password').val();
                 let fullName = $('#fullName').val();
                 let confirmPassword = $('#confirmPassword').val();
+                let dateRegister = moment().format("MMMM Do YYYY");
 
                 let data = {
                     username: username,
                     password: password,
                     fullName: fullName,
-                    confirmPassword: confirmPassword
+                    confirmPassword: confirmPassword,
+                    dateRegister: dateRegister
                 };
 
                 triggerEvent('register', data);
@@ -65,17 +67,20 @@ class UserView {
         });
     }
 
-    showUserInfo(){
+    showUserInfo() {
         let _that = this;
         $.get("templates/navbarUser.html", function (template) {
-
-            let data = {username:sessionStorage.username};
+            let data = {username: sessionStorage.username};
             let rendered = Mustache.render(template, data);
             $(_that._navBarSelector).html(rendered);
         });
 
         $.get('templates/userInfo.html', function (template) {
-            let data = {username:sessionStorage.username, fullName:sessionStorage.fullName};
+            let data = {
+                username: sessionStorage.username,
+                fullName: sessionStorage.fullName,
+                dateRegister: sessionStorage.dateRegister
+            };
             let rendered = Mustache.render(template, data);
             $(_that._wrapperSelector).html(rendered);
 

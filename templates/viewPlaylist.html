@@ -1,40 +1,49 @@
-
 <div class="panel panel-default">
-	<div class="panel-heading">Playlist : {{title}}</div>
+    <div class="panel-heading" id="panelHeading">Playlist : {{title}}</div>
 </div>
 
 <table class="table table-striped">
 
-  <thead>
+    <thead>
     <tr>
-      <th colspan="5">Songs</th>
+        <th colspan="6">Songs</th>
     </tr>
     <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Url</th>
-      <th colspan="2"> </th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Url</th>
+        <th colspan="5"></th>
     </tr>
-  </thead>
-  <tbody>
+    </thead>
+    <tbody>
     {{#songs}}
     <tr id="song-{{_id}}">
-      <td class="title">  {{_obj.title}}</td>
-      <td class="description">{{_obj.description}}</td>
+        <td class="title"> {{_obj.title}}</td>
+        <td class="description">{{_obj.description}}</td>
 
-      <td class="file"><a href="javascript:void(0);" onclick="window.open('{{_obj.file}}')">{{_obj.file}}</a></td>
+        <td class="file"><a href="javascript:void(0);" onclick="window.open('{{_obj.file}}')">{{_obj.file}}</a></td>
+        <td><a class="btn btn-primary" onclick="redirectUrl('#/playlists')">Back</a></td>
 
-      <td><a class="btn btn btn-danger" onclick="window.open('{{_obj.file}}')">Play</a></td>
+        <td><a class="btn btn btn-danger" onclick="window.open('{{_obj.file}}')">Play</a></td>
 
-      <td><a class="btn btn-primary" 
-      onClick="triggerEvent('deleteSongFromPlaylist', {id: '{{id}}', song_id: '{{_id}}' });"
-
-      >Delete</a></td>
+        <td><a class="btn btn-primary"
+               onClick="triggerConfirm('deleteSongFromPlaylist', {id: '{{id}}', song_id: '{{_id}}' });">Delete</a></td>
     </tr>
     {{/songs}}
     {{^songs}}
     <tr>
-      <td colspan="3">No Songs</td>
+        <td colspan="3">No Songs</td>
     </tbody>
     {{/songs}}
-  </table>
+</table>
+
+<script>
+    function triggerConfirm(event, data) {
+        let r = confirm("Are you sure want to delete this song.");
+        if (r == true) {
+            triggerEvent(event, data);
+        } else {
+            return false;
+        }
+    }
+</script>

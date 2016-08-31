@@ -1,26 +1,24 @@
-
-<h3>{{title}}</h3>
-
+<h3 class="songsTable">Songs</h3>
 <table class="table table-striped">
-<thead>
-        <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Url</th>
-            <th colspan="2"> </th>
-        </tr>
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Url</th>
+        <th colspan="6"></th>
+    </tr>
     </thead>
     <tbody>
-        {{#songs}}
-        <tr id="song-{{_id}}">
-            <td class="title">{{title}}</td>
-            <td class="description">{{description}}</td>
-            <td class="file"><a href="javascript:void(0);" onclick="window.open('{{file}}')">{{file}}</a></td>
-
-            <td><a class="btn btn btn-danger" onclick="window.open('{{file}}')">Play</a></td>
-            <td><a class="btn btn-primary" href="#/editSong/{{_id}}">Edit</a></td>
-            <td><a class="btn btn-primary" href="#/deleteSong/{{_id}}">Delete</a></td>
-        </tr>
-        {{/songs}}
+    {{#songs}}
+    <tr id="song-{{_id}}">
+        <td class="title">{{title}}</td>
+        <td class="description">{{description}}</td>
+        <td class="file"><a href="javascript:void(0);" onclick="window.open('{{file}}')">{{file}}</a></td>
+        <td><a class="btn btn btn-danger" onclick="window.open('{{file}}')">Play</a></td>
+        <td><a class="btn btn-primary" href="#/editSong/{{_id}}">Edit</a></td>
+        <td><a class="btn btn-primary" href="#/deleteSong/{{_id}}"
+               onclick="return confirm('Are you sure want to delete {{title}}');">Delete</a></td>
+    </tr>
+    {{/songs}}
     </tbody>
 </table>
