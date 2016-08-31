@@ -27,7 +27,7 @@
         <td><a class="btn btn btn-danger" onclick="window.open('{{_obj.file}}')">Play</a></td>
 
         <td><a class="btn btn-primary"
-               onClick="triggerConfirm('deleteSongFromPlaylist', {id: '{{id}}', song_id: '{{_id}}' });">Delete</a></td>
+               onClick="triggerConfirm('deleteSongFromPlaylist', {id: '{{id}}', song_id: '{{_id}}'} , '{{_obj.title}}' );">Delete</a></td>
     </tr>
     {{/songs}}
     {{^songs}}
@@ -38,8 +38,8 @@
 </table>
 
 <script>
-    function triggerConfirm(event, data) {
-        let r = confirm("Are you sure want to delete this song.");
+    function triggerConfirm(event, data, name) {
+        let r = confirm("Are you sure want to delete "+ name + ".");
         if (r == true) {
             triggerEvent(event, data);
         } else {

@@ -40,6 +40,7 @@ class SongController {
 
         this.requester.get(this._baseServiceUrl + "songs",
             function success(data) {
+            console.log(data);
                 _that._songView.showSongsPage(data);
             },
             function error() {
