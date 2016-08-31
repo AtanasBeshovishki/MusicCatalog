@@ -25,9 +25,10 @@
         <td><a class="btn btn-primary" onclick="redirectUrl('#/playlists')">Back</a></td>
 
         <td><a class="btn btn btn-danger" onclick="window.open('{{_obj.file}}')">Play</a></td>
-
+        {{#personal}}
         <td><a class="btn btn-primary"
                onClick="triggerConfirm('deleteSongFromPlaylist', {id: '{{id}}', song_id: '{{_id}}'} , '{{_obj.title}}' );">Delete</a></td>
+        {{/personal}}
     </tr>
     {{/songs}}
     {{^songs}}

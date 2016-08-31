@@ -5,8 +5,7 @@
     let baseUrl = "https://baas.kinvey.com";
     let appKey = "kid_S1UgWa2P"; // Place your appKey from Kinvey here...
     let appSecret = "3913934a8f184e87aa38f578ee535d9d"; // Place your appSecret from Kinvey here...
-    let _guestCredentials = "a2lkX1MxVWdXYTJQOjM5MTM5MzRhOGYxODRlODdhYTM4ZjU3OGVlNTM1ZDlk"; // Create a guest user using PostMan/RESTClient/Fiddler and place his authtoken here...
-
+    let _guestCredentials = "e2f7df7c-239c-4e66-88f3-3eda4662bcd4.xkk1ttKnRfl4HunO13gkEUvZE6zXBINfyCXupQ4Qgtc=";
 
     //Create AuthorizationService and Requester
 
@@ -36,6 +35,7 @@
 
     initEventServices();
 
+
     onRoute("#/", function () {
         // Check if user is logged in and if its not show the guest page, otherwise show the user page...
         if (!authService.isLoggedIn()) {
@@ -49,7 +49,6 @@
     onRoute("#/userInfo", function () {
         userController.showUserInfo();
     });
-
 
     onRoute("#/login", function () {
         userController.showLoginPage(authService.isLoggedIn());
@@ -71,7 +70,8 @@
         }
     });
 
-    onRoute("#/playlists", function () { 
+    onRoute("#/playlists", function () {
+
         if (!authService.isLoggedIn()) {
             homeController.showGuestPage();
         } else {
@@ -119,7 +119,6 @@
     onRoute("#/addSong/:id", function () {
         playlistController.showAddSongPage(this.params['id']);
     });
-
 
 
     bindEventHandler('login', function (ev, data) {

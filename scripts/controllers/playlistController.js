@@ -15,7 +15,15 @@ class PlaylistController {
 
         this.requester.get(this._baseServiceUrl + "playLists",
             function success(data) {
-                _that._playlistView.showPlaylistsPage(data);
+                let catalogPlaylists = [];
+
+                for (let i = 0; i < data.length; i++) {
+                    data[i].personal = isPersonal(data[i]);
+
+                    catalogPlaylists.push(data[i]);
+                }
+
+                _that._playlistView.showPlaylistsPage(catalogPlaylists);
             },
             function error() {
                 showPopup('error', "Error loading playlists!");
@@ -72,6 +80,7 @@ class PlaylistController {
 
         this.requester.get(requestUrl + "/" + id + "?resolve=songs", function success(data) {
                 data.id = id;
+                data.personal = isPersonal(data);
                 _that._playlistView.showViewPlayListPage(data);
             },
             function error() {

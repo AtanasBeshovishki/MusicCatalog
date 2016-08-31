@@ -14,10 +14,13 @@
         <td class="title">{{title}}</td>
         <td class="description">{{description}}</td>
         <td class="file"><a href="javascript:void(0);" onclick="window.open('{{file}}')">{{file}}</a></td>
-        <td><a class="btn btn btn-danger" onclick="window.open('{{file}}')">Play</a></td>
-        <td><a class="btn btn-primary" href="#/editSong/{{_id}}">Edit</a></td>
-        <td><a class="btn btn-primary" href="#/deleteSong/{{_id}}"
-               onclick="return confirm('Are you sure want to delete {{title}}');">Delete</a></td>
+        <td>
+        	<a class="btn btn btn-danger" onclick="window.open('{{file}}')">Play</a>
+       {{#personal}}
+			<a class="btn btn-primary" href="#/editSong/{{_id}}">Edit</a>
+	        <a class="btn btn-primary" href="#/deleteSong/{{_id}}" onclick="return confirm('Are you sure want to delete {{title}}');">Delete</a>
+       {{/personal}}
+       </td>
     </tr>
     {{/songs}}
     </tbody>

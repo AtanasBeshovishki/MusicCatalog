@@ -202,3 +202,12 @@ function triggerEvent(event, data) {
 function run(rootUrl) {
     _router.run(rootUrl);
 }
+
+
+function isPersonal (item) {
+	if (sessionStorage._id && sessionStorage._id == item._acl.creator) {
+		return true;
+	}
+
+	return false;
+}

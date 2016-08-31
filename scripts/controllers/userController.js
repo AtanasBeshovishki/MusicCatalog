@@ -18,9 +18,7 @@ class UserController {
     showUserInfo() {
         let _that = this;
 
-
         _that._userView.showUserInfo();
-
     }
 
     register(requestData) {

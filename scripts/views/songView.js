@@ -4,13 +4,14 @@ class SongView {
         this._navBarSelector = navBarSelector;
 
         let _that = this;
+        if (sessionStorage._id) {
+            $.get("templates/navbarUser.html", function (template) {
 
-        $.get("templates/navbarUser.html", function (template) {
-
-            let data = {username: sessionStorage.username};
-            let rendered = Mustache.render(template, data);
-            $(_that._navBarSelector).html(rendered);
-        });
+                let data = {username: sessionStorage.username};
+                let rendered = Mustache.render(template, data);
+                $(_that._navBarSelector).html(rendered);
+            });
+        }
     }
 
     showCreateSongPage() {
@@ -23,7 +24,6 @@ class SongView {
         $.get(templateUrl, function (template) {
             let rendered = Mustache.render(template, null);
             $(_that._wrapperSelector).html(rendered);
-
 
             $('#create-song-button').on('click', function (ev) {
 

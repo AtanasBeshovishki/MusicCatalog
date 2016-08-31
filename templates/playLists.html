@@ -11,11 +11,12 @@
     <tr id="playList-{{_id}}">
         <td class="titlePlayList"><a href="#"
                                      onclick="play('{{title}}')">{{title}}</a></td>
-        <td><a class="btn btn-primary" href="#/viewPlaylist/{{_id}}">View</a></td>
-        <td><a class="btn btn-primary" href="#/addSong/{{_id}}">Add song</a></td>
-        <td><a class="btn btn-primary" href="#/editPlayList/{{_id}}">Edit</a></td>
-        <td><a class="btn btn-primary" href="#/deletePlaylist/{{_id}}"
-               onclick="return confirm('Are you sure want to delete {{title}}');">Delete</a></td>
+        <td><a class="btn btn-primary" href="#/viewPlaylist/{{_id}}">View</a>
+	        {{#personal}}
+	        <a class="btn btn-primary" href="#/addSong/{{_id}}">Add song</a> <a class="btn btn-primary" href="#/editPlayList/{{_id}}">Edit</a>
+	        <a class="btn btn-primary" href="#/deletePlaylist/{{_id}}" onclick='return confirm("Are you sure want to delete {{title}}");'>Delete</a>
+	        {{/personal}}
+        </td>
     </tr>
     {{/playLists}}
     </tbody>

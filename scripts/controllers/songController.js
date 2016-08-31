@@ -40,8 +40,15 @@ class SongController {
 
         this.requester.get(this._baseServiceUrl + "songs",
             function success(data) {
-            console.log(data);
-                _that._songView.showSongsPage(data);
+                let catalogSongs = [];
+
+                for (let i = 0; i < data.length; i++) {
+                    data[i].personal = isPersonal(data[i]);
+
+                    catalogSongs.push(data[i]);
+                }
+
+                _that._songView.showSongsPage(catalogSongs);
             },
             function error() {
                 showPopup('error', "Error loading songs!");

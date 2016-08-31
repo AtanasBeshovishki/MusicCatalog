@@ -4,13 +4,14 @@ class PlaylistView {
         this._navBarSelector = navBarSelector;
 
         let _that = this;
-
+        if(sessionStorage._id) {
         $.get("templates/navbarUser.html", function (template) {
 
             let data = {username: sessionStorage.username};
             let rendered = Mustache.render(template, data);
             $(_that._navBarSelector).html(rendered);
         });
+        }
     }
 
     showCreatePlayListPage() {
@@ -45,7 +46,7 @@ class PlaylistView {
     showPlaylistsPage(data) {
         let _that = this;
 
-        $.get("templates/playlists.html", function (template) {
+        $.get("templates/playLists.html", function (template) {
             let rendered = Mustache.render(template, {playLists: data});
             $(_that._wrapperSelector).html(rendered);
         });
@@ -84,7 +85,6 @@ class PlaylistView {
 
         $.get("templates/viewPlayList.html", function (template) {
             let rendered = Mustache.render(template, data);
-
             $(_that._wrapperSelector).html(rendered);
         });
     }
